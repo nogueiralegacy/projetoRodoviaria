@@ -1,26 +1,35 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define FILEIRA 12
-#define POLTRONA 4
+#define FILEIRAS 12
+#define COLUNAS 4
 
 struct onibus {
-    char assentos[FILEIRA][POLTRONA];
+    char **assentos;
     char codigoDoOnibus[12];
     int quantidadeDeAssentos;
 };
 
 typedef struct onibus Onibus;
 
+char **criaAssentos(int qntFileira, int qntColunas) {
+    char **assentos = (char **) malloc(qntFileira * sizeof(char *));
+    char *assentosAux;
+
+    for (int indice = 0; indice < qntFileira; indice++) {
+        assentosAux = (char *) malloc(qntColunas * sizeof(char));
+        memset(assentosAux, (char) 'L', qntColunas * sizeof(char));
+        assentos[indice] = assentosAux;
+    }
+
+    return assentos;
+}
+
 Onibus *iniciaOnibus(char codigoDoOnibus[12]) {
     Onibus *onibus = (Onibus *) malloc(sizeof(Onibus));
-    onibus->quantidadeDeAssentos = FILEIRA * POLTRONA;
+    onibus->assentos = criaAssentos(FILEIRAS, COLUNAS);
+    onibus->quantidadeDeAssentos = FILEIRAS * COLUNAS;
     strcpy(onibus->codigoDoOnibus, codigoDoOnibus);
-    for (int i = 0; i < FILEIRA; i++) {
-        for (int j = 0; j < POLTRONA; j++) {
-            onibus->assentos[i][j] = 'L';
-        }
-    }
     return onibus;
 }
 
@@ -34,4 +43,16 @@ int getQuantidadeDeAssentos(Onibus *onibus) {
 
 void setQuantidadeDeAssentos(Onibus *onibus, int quantidadeDeAssentos) {
     onibus->quantidadeDeAssentos = quantidadeDeAssentos;
+}
+
+char **getAssentos(Onibus *onibus) {
+    return onibus->assentos;
+}
+
+int getQuantidadeDeFileiras(Onibus *onibus) {
+    return FILEIRAS;
+}
+
+int getQuantidadeDeColunas(Onibus *onibus) {
+    return COLUNAS;
 }
