@@ -19,4 +19,8 @@ int getQuantidadeDeFileiras(Onibus *onibus);
 
 int getQuantidadeDeColunas(Onibus *onibus);
 
+void liberaAssentos(char **assentos, int qntFileira);
+
+void liberaOnibus(Onibus *onibus);
+
 #endif //ONIBUS_H

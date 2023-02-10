@@ -16,7 +16,7 @@ void testIniciaOnibusCodigo() {
         printf(ANSI_COLOR_RED "testIniciaOnibusCodigo(): Failed!\n" ANSI_DEFAULT);
     }
 
-    free(onibus);
+    liberaOnibus(onibus);
 }
 
 void testIniciaOnibusAssentos() {
@@ -33,7 +33,7 @@ void testIniciaOnibusAssentos() {
     }
 
     printf(ANSI_COLOR_GREEN "testIniciaOnibusAssentos(): Success!\n" ANSI_DEFAULT);
-    free(onibus);
+    liberaOnibus(onibus);
 }
 
 int agrupaTestesOnibus() {
