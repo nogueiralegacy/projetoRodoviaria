@@ -1,7 +1,5 @@
 #include <string.h>
 #include <stdlib.h>
-#include "Passagem.h"
-#include "Onibus.h"
 #include "Viagem.h"
 
 struct viagem {

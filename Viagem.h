@@ -1,6 +1,8 @@
 #ifndef PROJETORODOVIARIA_VIAGEM_H
 #define PROJETORODOVIARIA_VIAGEM_H
 
+#include "Passagem.h"
+#include "Onibus.h"
 #include <time.h>
 
 typedef struct viagem Viagem;
