@@ -51,6 +51,17 @@ Passageiro *criaPassageiro() {
     return passageiro;
 }
 
+void liberaPassageiro(Passageiro *passageiro) {
+    free(passageiro);
+}
+
+/**
+ * Retorna o nome do passageiro
+ *
+ * @param passageiro Passageiro
+ *
+ * @return Nome do passageiro
+ */
 char *getNome(Passageiro *passageiro) {
     return passageiro->nome;
 }

@@ -7,6 +7,8 @@ Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], cha
 
 Passageiro *criaPassageiro();
 
+void liberaPassageiro(Passageiro *passageiro);
+
 char *getNome(Passageiro *passageiro);
 
 char *getCpf(Passageiro *passageiro);
