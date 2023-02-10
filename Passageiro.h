@@ -3,8 +3,25 @@
 
  typedef struct passageiro Passageiro;
 
+/**
+ * Construtor com todos os atributos de passageiro
+ *
+ * @param nome Nome do Passageiro
+ * @param cpf CPF do passageiro
+ * @param telefone Telefone do passageiro
+ * @param email Email do passageiro
+ * @param telefoneDeEmergencia Telefone de emergência do passageiro
+ *
+ * @return O endereço de moméria do passageiro criado
+ */
 Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]);
 
+/**
+ * Construtor vazio, retorna um endereço (instância) de Passageiro
+ * com todos os campos vazios.
+ *
+ * @return Instância de Passageiro
+ */
 Passageiro *criaPassageiro();
 
 void liberaPassageiro(Passageiro *passageiro);
