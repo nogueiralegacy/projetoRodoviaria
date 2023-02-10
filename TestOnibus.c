@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include "onibus.h"
 
 #define ANSI_COLOR_RED "\x1b[31m"

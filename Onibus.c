@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include "Onibus.h"
 
 #define FILEIRAS 12
 #define COLUNAS 4
@@ -34,7 +35,6 @@ Onibus *iniciaOnibus(char codigoDoOnibus[12]) {
 }
 
 void liberaAssentos(char **assentos) {
-
     for (int indice = 0; indice < FILEIRAS; indice++) {
         free(assentos[indice]);
     }
