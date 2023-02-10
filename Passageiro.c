@@ -1,5 +1,3 @@
-#include <string.h>
-#include <stdlib.h>
 #include "Passageiro.h"
 
 struct passageiro {

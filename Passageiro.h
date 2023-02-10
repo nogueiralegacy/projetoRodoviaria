@@ -1,3 +1,7 @@
+#include <string.h>
+#include <stdlib.h>
+
+
 #ifndef PROJETORODOVIARIA_PASSAGEIRO_H
 #define PROJETORODOVIARIA_PASSAGEIRO_H
 
