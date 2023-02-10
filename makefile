@@ -13,5 +13,5 @@ run: projeto
 
 #Testes
 test:
-	gcc -o test testMain.c TestOnibus.c Onibus.c
+	gcc -o test testMain.c TestOnibus.c Onibus.c TestPassageiro.c Passageiro.c
 	./test
