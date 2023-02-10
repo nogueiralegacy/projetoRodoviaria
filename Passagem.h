@@ -1,6 +1,8 @@
 #ifndef PROJETORODOVIARIA_PASSAGEM_H
 #define PROJETORODOVIARIA_PASSAGEM_H
 
+#include "Passageiro.h"
+
 typedef struct passagem Passagem;
 
 /**
@@ -24,7 +26,14 @@ struct passagem *iniciaPassagem(char codigoDaPassagem[12], int fileira, int colu
  */
 struct passagem *criaPassagem();
 
-void getCodigoDaPassagem(Passagem *passagem, char codigoDaPassagem[12]);
+/**
+ * Destrutor de Passagem
+ *
+ * @param passagem Instância de Passagem
+ */
+void liberaPassagem(struct passagem *passagem);
+
+char *getCodigoDaPassagem(Passagem *passagem);
 
 int getFileira(Passagem *passagem);
 

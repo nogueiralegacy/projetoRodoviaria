@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include "Passagem.h"
 
 struct passagem {
     char codigoDaPassagem[12];
@@ -31,6 +32,11 @@ Passagem *criaPassagem() {
     passagem->passageiro = NULL;
 
     return passagem;
+}
+
+void liberaPassagem(Passagem *passagem) {
+    liberaPassageiro(passagem->passageiro);
+    free(passagem);
 }
 
 char *getCodigoDaPassagem(Passagem *passagem) {
