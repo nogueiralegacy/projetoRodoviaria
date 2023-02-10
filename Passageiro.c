@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include "Passageiro.h"
 
 struct passageiro {
@@ -10,6 +11,18 @@ struct passageiro {
 };
 
 typedef struct passageiro Passageiro;
+
+Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]) {
+    Passageiro *passageiro = (Passageiro *) malloc(sizeof(Passageiro));
+    strcpy(passageiro->nome, nome);
+    strcpy(passageiro->cpf, cpf);
+    strcpy(passageiro->telefone, telefone);
+    strcpy(passageiro->email, email);
+    strcpy(passageiro->telefoneDeEmergencia, telefoneDeEmergencia);
+
+    return passageiro;
+}
+
 
 char *getNome(Passageiro *passageiro) {
     return passageiro->nome;

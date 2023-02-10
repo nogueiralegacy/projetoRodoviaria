@@ -3,6 +3,8 @@
 
  typedef struct passageiro Passageiro;
 
+Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]);
+
 char *getNome(Passageiro *passageiro);
 
 char *getCpf(Passageiro *passageiro);
