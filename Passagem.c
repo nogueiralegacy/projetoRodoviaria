@@ -1,18 +1,37 @@
 #include <string.h>
+#include <stdlib.h>
 
 struct passagem {
     char codigoDaPassagem[12];
     char fileira;
     char coluna;
     float valor;
-    // Executada ou Pendente (Quando uma passagem é executada significa que
-    // o passageiro já embarcou no ônibus)
-    char status[10];
     struct passageiro *passageiro;
 };
 
 typedef struct passagem Passagem;
 
+Passagem *iniciaPassagem(char codigoDaPassagem[12], char fileira, char coluna, float valor, struct passageiro *passageiro) {
+    Passagem *passagem = (Passagem *) malloc(sizeof(Passagem));
+    strcpy(passagem->codigoDaPassagem, codigoDaPassagem);
+    passagem->fileira = fileira;
+    passagem->coluna = coluna;
+    passagem->valor = valor;
+    passagem->passageiro = passageiro;
+
+    return passagem;
+}
+
+Passagem *criaPassagem() {
+    Passagem *passagem = (Passagem *) malloc(sizeof(Passagem));
+    strcpy(passagem->codigoDaPassagem, "");
+    passagem->fileira = ' ';
+    passagem->coluna = ' ';
+    passagem->valor = 0.0;
+    passagem->passageiro = NULL;
+
+    return passagem;
+}
 
 char *getCodigoDaPassagem(Passagem *passagem) {
     return passagem->codigoDaPassagem;
@@ -27,10 +46,6 @@ char getColuna(Passagem *passagem) {
 
 float getValor(Passagem *passagem) {
     return passagem->valor;
-}
-
-char *getStatus(Passagem *passagem) {
-    return passagem->status;
 }
 
 struct passageiro *getPassageiro(Passagem *passagem) {
@@ -51,10 +66,6 @@ void setColuna(Passagem *passagem, char coluna) {
 
 void setValor(Passagem *passagem, float valor) {
     passagem->valor = valor;
-}
-
-void setStatus(Passagem *passagem, char status[10]) {
-    strcpy(passagem->status, status);
 }
 
 void setPassageiro(Passagem *passagem, struct passageiro *passageiro) {
