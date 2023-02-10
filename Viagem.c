@@ -41,3 +41,59 @@ Viagem *criaViagem() {
 
     return viagem;
 }
+
+char *getCodigoDaViagem(Viagem *viagem) {
+    return viagem->codigoDaViagem;
+}
+
+char *getCompanhia(Viagem *viagem) {
+    return viagem->companhia;
+}
+
+char *getOrigem(Viagem *viagem) {
+    return viagem->origem;
+}
+
+char *getDestino(Viagem *viagem) {
+    return viagem->destino;
+}
+
+time_t getDataEHoraDeSaida(Viagem *viagem) {
+    return viagem->dataEHoraDeSaida;
+}
+
+Passagem *getPassagens(Viagem *viagem) {
+    return viagem->passagens;
+}
+
+Onibus *getOnibus(Viagem *viagem) {
+    return viagem->onibus;
+}
+
+void setCodigoDaViagem(Viagem *viagem, char codigoDaViagem[12]) {
+    strcpy(viagem->codigoDaViagem, codigoDaViagem);
+}
+
+void setCompanhia(Viagem *viagem, char companhia[50]) {
+    strcpy(viagem->companhia, companhia);
+}
+
+void setOrigem(Viagem *viagem, char origem[50]) {
+    strcpy(viagem->origem, origem);
+}
+
+void setDestino(Viagem *viagem, char destino[50]) {
+    strcpy(viagem->destino, destino);
+}
+
+void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida) {
+    viagem->dataEHoraDeSaida = dataEHoraDeSaida;
+}
+
+void setPassagens(Viagem *viagem, Passagem *passagens) {
+    viagem->passagens = passagens;
+}
+
+void setOnibus(Viagem *viagem, Onibus *onibus) {
+    viagem->onibus = onibus;
+}
