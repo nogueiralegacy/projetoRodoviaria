@@ -8,3 +8,5 @@ struct Viagem {
     struct passagem *passagens;
     struct onibus *onibus;
 };
+
+typedef struct Viagem Viagem;
