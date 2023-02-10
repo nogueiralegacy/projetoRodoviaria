@@ -2,19 +2,36 @@
 #include <stdlib.h>
 #include "Viagem.h"
 
+struct passagemVendida {
+    int posicao;
+    struct passagem *passagem;
+    struct passagemVendida *proximo;
+};
+
+typedef struct passagemVendida PassagemVendida;
+
+struct listaPassagensVendidas {
+    int quantidade;
+    struct passagemVendida *inicio;
+    struct passagemVendida *fim;
+};
+
+typedef struct listaPassagensVendidas ListaPassagensVendidas;
+
 struct viagem {
     char codigoDaViagem[12];
     char companhia[50];
     char origem[50];
     char destino[50];
     time_t dataEHoraDeSaida;
-    struct passagem *passagens;
+    // Passagens vendidas
+    struct listaPassagensVendidas *listaPassagensVendidas;
     struct onibus *onibus;
 };
 
 typedef struct viagem Viagem;
 
-Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct passagem *passagens, struct onibus *onibus) {
+Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct listaPassagensVendidas *listaPassagensVendidas, struct onibus *onibus) {
     Viagem *viagem = (Viagem *) malloc(sizeof(Viagem));
 
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
@@ -22,7 +39,7 @@ Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50
     strcpy(viagem->origem, origem);
     strcpy(viagem->destino, destino);
     viagem->dataEHoraDeSaida = dataEHoraDeSaida;
-    viagem->passagens = passagens;
+    viagem->listaPassagensVendidas = listaPassagensVendidas;
     viagem->onibus = onibus;
 
     return viagem;
@@ -35,7 +52,7 @@ Viagem *criaViagem() {
     strcpy(viagem->origem, "");
     strcpy(viagem->destino, "");
     viagem->dataEHoraDeSaida = 0;
-    viagem->passagens = NULL;
+    viagem->listaPassagensVendidas = NULL;
     viagem->onibus = NULL;
 
     return viagem;
@@ -64,10 +81,6 @@ time_t getDataEHoraDeSaida(Viagem *viagem) {
     return viagem->dataEHoraDeSaida;
 }
 
-Passagem *getPassagens(Viagem *viagem) {
-    return viagem->passagens;
-}
-
 Onibus *getOnibus(Viagem *viagem) {
     return viagem->onibus;
 }
@@ -91,11 +104,6 @@ void setDestino(Viagem *viagem, char destino[50]) {
 void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida) {
     viagem->dataEHoraDeSaida = dataEHoraDeSaida;
 }
-
-void setPassagens(Viagem *viagem, Passagem *passagens) {
-    viagem->passagens = passagens;
-}
-
 void setOnibus(Viagem *viagem, Onibus *onibus) {
     viagem->onibus = onibus;
 }
