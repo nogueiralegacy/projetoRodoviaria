@@ -14,7 +14,7 @@
  *
  * @return O endereço de moméria do passageiro criado
  */
-Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]);
+struct passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]);
 
 /**
  * Construtor vazio, retorna um endereço (instância) de Passageiro
@@ -22,7 +22,7 @@ Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], cha
  *
  * @return Instância de Passageiro
  */
-Passageiro *criaPassageiro();
+struct passageiro *criaPassageiro();
 
 void liberaPassageiro(Passageiro *passageiro);
 

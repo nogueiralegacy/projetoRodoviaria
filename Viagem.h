@@ -5,9 +5,9 @@
 
 typedef struct viagem Viagem;
 
-Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct passagem *passagens, struct onibus *onibus);
+struct viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct passagem *passagens, struct onibus *onibus);
 
-Viagem *criaViagem();
+struct viagem *criaViagem();
 
 void liberaViagem(Viagem *viagem);
 

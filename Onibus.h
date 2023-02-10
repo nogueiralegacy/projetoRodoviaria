@@ -3,7 +3,7 @@
 
 typedef struct onibus Onibus;
 
-Onibus *iniciaOnibus(char codigoDoOnibus[12]);
+struct onibus *iniciaOnibus(char codigoDoOnibus[12]);
 
 char **criaAssentos(int qntFileira, int qntColunas);
 

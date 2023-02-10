@@ -1,9 +1,8 @@
-#include "Viagem.h"
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
 #include "Passagem.h"
 #include "Onibus.h"
+#include "Viagem.h"
 
 struct viagem {
     char codigoDaViagem[12];

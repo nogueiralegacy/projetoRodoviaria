@@ -14,7 +14,7 @@ typedef struct passagem Passagem;
  *
  * @return Um endereço de memória
  */
-struct Passagem *iniciaPassagem(char codigoDaPassagem[12], char fileira, char coluna, float valor, struct passageiro *passageiro);
+struct passagem *iniciaPassagem(char codigoDaPassagem[12], char fileira, char coluna, float valor, struct passageiro *passageiro);
 
 /**
  * Construtor vazio, retorna um endereço (instância) de Passagem
@@ -22,7 +22,7 @@ struct Passagem *iniciaPassagem(char codigoDaPassagem[12], char fileira, char co
  *
  * @return Instância de Passagem
  */
-Passagem *criaPassagem();
+struct passagem *criaPassagem();
 
 void getCodigoDaPassagem(Passagem *passagem, char codigoDaPassagem[12]);
 
