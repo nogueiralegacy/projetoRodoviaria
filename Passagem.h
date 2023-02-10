@@ -1,7 +1,7 @@
+#include "Passageiro.h"
+
 #ifndef PROJETORODOVIARIA_PASSAGEM_H
 #define PROJETORODOVIARIA_PASSAGEM_H
-
-#include "Passageiro.h"
 
 typedef struct passagem Passagem;
 
