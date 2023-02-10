@@ -35,9 +35,7 @@ void testIniciaOnibusAssentos() {
     liberaOnibus(onibus);
 }
 
-int agrupaTestesOnibus() {
+void agrupaTestesOnibus() {
     testIniciaOnibusCodigo();
     testIniciaOnibusAssentos();
-
-    return 0;
 }

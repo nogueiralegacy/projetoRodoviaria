@@ -1,6 +1,6 @@
 #ifndef PROJETORODOVIARIA_TESTONIBUS_H
 #define PROJETORODOVIARIA_TESTONIBUS_H
 
-int agrupaTestesOnibus();
+void agrupaTestesOnibus();
 
 #endif //PROJETORODOVIARIA_TESTONIBUS_H
