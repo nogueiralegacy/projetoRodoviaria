@@ -7,7 +7,6 @@ struct passagemVendida {
 
 typedef struct passagemVendida PassagemVendida;
 
-
 PassagemVendida *iniciaPassagemVendida(Passagem *passagem) {
     PassagemVendida *passagemVendida = (PassagemVendida *) malloc(sizeof(PassagemVendida));
     passagemVendida->passagem = passagem;
@@ -76,6 +75,28 @@ Viagem *criaViagem() {
 }
 void liberaViagem(Viagem *viagem) {
     free(viagem);
+}
+
+void liberaPassagemVendida(PassagemVendida *passagemVendida) {
+    free(passagemVendida);
+}
+
+void liberaListaDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
+    PassagemVendida *passagemVendidaAux = listaPassagensVendidas->inicio;
+    Passagem *passagemAux = listaPassagensVendidas->inicio->passagem;
+
+    while (passagemVendidaAux != NULL) {
+        PassagemVendida *passagemVendidaAux2 = passagemVendidaAux->proximo;
+        Passagem *passagemAux2 = passagemVendidaAux2->passagem;
+
+        liberaPassagem(passagemAux);
+        liberaPassagemVendida(passagemVendidaAux);
+
+        passagemAux = passagemAux2;
+        passagemVendidaAux = passagemVendidaAux2;
+    }
+
+    liberaListaDePassagensVendidas(listaPassagensVendidas);
 }
 
 char *getCodigoDaViagem(Viagem *viagem) {

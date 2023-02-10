@@ -22,6 +22,10 @@ struct viagem *criaViagem();
 
 void liberaViagem(Viagem *viagem);
 
+void liberaPassagemVendida(struct passagemVendida *passagemVendida);
+
+void liberaListaDePassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas);
+
 char *getCodigoDaViagem(Viagem *viagem);
 
 char *getCompanhia(Viagem *viagem);
