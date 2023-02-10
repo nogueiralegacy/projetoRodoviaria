@@ -1,5 +1,5 @@
-#ifndef ONIBUS_H
-#define ONIBUS_H
+#ifndef PROJETORODOVIARIA_ONIBUS_H
+#define PROJETORODOVIARIA_ONIBUS_H
 
 typedef struct onibus Onibus;
 
@@ -23,4 +23,4 @@ void liberaAssentos(char **assentos, int qntFileira);
 
 void liberaOnibus(Onibus *onibus);
 
-#endif //ONIBUS_H
+#endif //PROJETORODOVIARIA_ONIBUS_H
