@@ -1,10 +1,11 @@
+#include "Viagem.h"
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include "Passagem.h"
 #include "Onibus.h"
 
-struct Viagem {
+struct viagem {
     char codigoDaViagem[12];
     char companhia[50];
     char origem[50];
@@ -14,10 +15,11 @@ struct Viagem {
     struct onibus *onibus;
 };
 
-typedef struct Viagem Viagem;
+typedef struct viagem Viagem;
 
 Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct passagem *passagens, struct onibus *onibus) {
     Viagem *viagem = (Viagem *) malloc(sizeof(Viagem));
+
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
     strcpy(viagem->companhia, companhia);
     strcpy(viagem->origem, origem);
@@ -40,6 +42,9 @@ Viagem *criaViagem() {
     viagem->onibus = NULL;
 
     return viagem;
+}
+void liberaViagem(Viagem *viagem) {
+    free(viagem);
 }
 
 char *getCodigoDaViagem(Viagem *viagem) {

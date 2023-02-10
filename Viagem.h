@@ -9,6 +9,8 @@ Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50
 
 Viagem *criaViagem();
 
+void liberaViagem(Viagem *viagem);
+
 char *getCodigoDaViagem(Viagem *viagem);
 
 char *getCompanhia(Viagem *viagem);

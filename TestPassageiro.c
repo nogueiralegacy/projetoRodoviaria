@@ -1,4 +1,5 @@
 #include "Passageiro.h"
+#include "TestPassageiro.h"
 #include <stdio.h>
 #include <string.h>
 
