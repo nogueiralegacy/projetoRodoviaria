@@ -1,14 +1,20 @@
-#include <string.h>
-#include <stdlib.h>
 #include "Viagem.h"
 
 struct passagemVendida {
-    int posicao;
     struct passagem *passagem;
     struct passagemVendida *proximo;
 };
 
 typedef struct passagemVendida PassagemVendida;
+
+
+PassagemVendida *iniciaPassagemVendida(Passagem *passagem) {
+    PassagemVendida *passagemVendida = (PassagemVendida *) malloc(sizeof(PassagemVendida));
+    passagemVendida->passagem = passagem;
+    passagemVendida->proximo = NULL;
+
+    return passagemVendida;
+}
 
 struct listaPassagensVendidas {
     int quantidade;
@@ -17,6 +23,15 @@ struct listaPassagensVendidas {
 };
 
 typedef struct listaPassagensVendidas ListaPassagensVendidas;
+
+ListaPassagensVendidas *iniciaListaPassagensVendidas() {
+    ListaPassagensVendidas *listaPassagensVendidas = (ListaPassagensVendidas *) malloc(sizeof(ListaPassagensVendidas));
+    listaPassagensVendidas->quantidade = 0;
+    listaPassagensVendidas->inicio = NULL;
+    listaPassagensVendidas->fim = NULL;
+
+    return listaPassagensVendidas;
+}
 
 struct viagem {
     char codigoDaViagem[12];
@@ -31,7 +46,9 @@ struct viagem {
 
 typedef struct viagem Viagem;
 
-Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct listaPassagensVendidas *listaPassagensVendidas, struct onibus *onibus) {
+Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50],
+                     char origem[50],char destino[50],time_t dataEHoraDeSaida,
+                     struct listaPassagensVendidas *listaPassagensVendidas,struct onibus *onibus) {
     Viagem *viagem = (Viagem *) malloc(sizeof(Viagem));
 
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
@@ -106,4 +123,20 @@ void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida) {
 }
 void setOnibus(Viagem *viagem, Onibus *onibus) {
     viagem->onibus = onibus;
+}
+
+Passagem *getPassagem(PassagemVendida *passagemVendida) {
+    return passagemVendida->passagem;
+}
+
+PassagemVendida *getProximo(PassagemVendida *passagemVendida) {
+    return passagemVendida->proximo;
+}
+
+void setPassagem(PassagemVendida *passagemVendida, Passagem *passagem) {
+    passagemVendida->passagem = passagem;
+}
+
+void setProximo(PassagemVendida *passagemVendida, PassagemVendida *proximo) {
+    passagemVendida->proximo = proximo;
 }

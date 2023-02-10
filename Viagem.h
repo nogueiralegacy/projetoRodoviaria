@@ -1,13 +1,18 @@
-#ifndef PROJETORODOVIARIA_VIAGEM_H
-#define PROJETORODOVIARIA_VIAGEM_H
-
+#include "Passageiro.h"
+#include <time.h>
 #include "Passagem.h"
 #include "Onibus.h"
-#include <time.h>
+
+#ifndef PROJETORODOVIARIA_VIAGEM_H
+#define PROJETORODOVIARIA_VIAGEM_H
 
 typedef struct passagemVendida PassagemVendida;
 
 typedef struct listaPassagensVendidas ListaPassagensVendidas;
+
+struct passagemVendida *iniciaPassagemVendida(Passagem *passagem);
+
+struct listaPassagensVendidas *iniciaListaPassagensVendidas();
 
 typedef struct viagem Viagem;
 
@@ -40,4 +45,13 @@ void setDestino(Viagem *viagem, char destino[50]);
 void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida);
 
 void setOnibus(Viagem *viagem, struct onibus *onibus);
+
+struct passagem *getPassagem(struct passagemVendida *passagemVendida);
+
+struct passagemVendida *getProximo(struct passagemVendida *listaPassagensVendidas);
+
+void setPassagem(struct passagemVendida *passagemVendida, struct passagem *passagem);
+
+void setProximo(struct passagemVendida *passagemVendida, struct passagemVendida *proximo);
+
 #endif //PROJETORODOVIARIA_VIAGEM_H
