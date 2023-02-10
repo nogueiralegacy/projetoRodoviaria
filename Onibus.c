@@ -33,16 +33,16 @@ Onibus *iniciaOnibus(char codigoDoOnibus[12]) {
     return onibus;
 }
 
-void liberaAssentos(char **assentos, int qntFileira) {
+void liberaAssentos(char **assentos) {
 
-    for (int indice = 0; indice < qntFileira; indice++) {
+    for (int indice = 0; indice < FILEIRAS; indice++) {
         free(assentos[indice]);
     }
     free(assentos);
 }
 
 void liberaOnibus(Onibus *onibus) {
-    liberaAssentos(onibus->assentos, FILEIRAS);
+    liberaAssentos(onibus->assentos);
     free(onibus);
 }
 
@@ -52,10 +52,6 @@ char *getCodigoDoOnibus(Onibus *onibus) {
 
 int getQuantidadeDeAssentos(Onibus *onibus) {
     return onibus->quantidadeDeAssentos;
-}
-
-void setQuantidadeDeAssentos(Onibus *onibus, int quantidadeDeAssentos) {
-    onibus->quantidadeDeAssentos = quantidadeDeAssentos;
 }
 
 char **getAssentos(Onibus *onibus) {
