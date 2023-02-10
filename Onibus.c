@@ -5,3 +5,5 @@ struct onibus {
     char assentos[FILEIRA][POLTRONA];
     char codigoDoOnibus[12];
 };
+
+typedef struct onibus Onibus;
