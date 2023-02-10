@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdlib.h>
+
 #ifndef PROJETORODOVIARIA_ONIBUS_H
 #define PROJETORODOVIARIA_ONIBUS_H
 
