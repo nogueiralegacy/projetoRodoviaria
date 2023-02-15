@@ -29,14 +29,16 @@ void testIniciaPassagemAtributos() {
                 if (getValor(passagem) == valor) {
                     if (strcmp(getCpf(passageiro), cpf) == 0) {
                         printf(ANSI_COLOR_GREEN "testIniciaPassagemAtributos(): Success!\n" ANSI_DEFAULT);
+                        liberaPassagem(passagem);
+                        return;
                     }
                 }
             }
         }
     } else {
         printf(ANSI_COLOR_RED "testIniciaPassagemAtributos(): Failed!\n" ANSI_DEFAULT);
+        liberaPassagem(passagem);
     }
-    liberaPassagem(passagem);
 }
 
 void agrupaTestesPassagem() {
