@@ -1,7 +1,6 @@
 #include "Passagem.h"
 #include "Passageiro.h"
-#include <string.h>
-#include <stdio.h>
+#include "stdio.h"
 
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_DEFAULT "\033[0m"
