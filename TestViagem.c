@@ -30,7 +30,7 @@ void testIniciaPassagemVendida() {
 }
 
 
-void testIniciaListaDePassagensVendidas() {
+void testInsereListaPassagensVendidas() {
     // Cria passagem1 sem atributos
     struct passagem *passagem1 = criaPassagem();
 
@@ -54,10 +54,14 @@ void testIniciaListaDePassagensVendidas() {
     PassagemVendida *segundaPassagemVendida = getProximo(primeiraPassagemVendida);
 
     PassagemVendida *ultimaPassagemVendida = getFimListaPassagensVendidas(listaPassagensVendidas);
-    // Verifica se a lista de passagens vendidas foi instanciada corretamente
+    /* Verifica se a lista de passagens vendidas foi instanciada corretamente */
+    //Verifica se a primeira passagemVendida é a passagem1
     if (getCodigoDaPassagem(getPassagem(primeiraPassagemVendida)) == getCodigoDaPassagem(passagem1)) {
+        //Verifica se a última passagemVendida é a passagem2
         if (getCodigoDaPassagem(getPassagem(ultimaPassagemVendida)) == getCodigoDaPassagem(passagem2)) {
+            //Verifica se a segunda passagem é a passagem2
             if (getCodigoDaPassagem(getPassagem(segundaPassagemVendida)) == getCodigoDaPassagem(passagem2)) {
+                //Verifica se a segunda passagemVendida não tem próximo
                 if (getProximo(segundaPassagemVendida) == NULL) {
                     printf(ANSI_COLOR_GREEN "testIniciaListaDePassagensVendidas(): Success!\n" ANSI_DEFAULT);
                     liberaListaDePassagensVendidas(listaPassagensVendidas);
@@ -73,5 +77,5 @@ void testIniciaListaDePassagensVendidas() {
 
 void agrupaTestesViagem() {
     testIniciaPassagemVendida();
-    testIniciaListaDePassagensVendidas();
+    testInsereListaPassagensVendidas();
 }
