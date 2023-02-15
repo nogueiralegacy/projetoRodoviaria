@@ -16,7 +16,7 @@ struct listaPassagensVendidas *iniciaListaPassagensVendidas();
 
 typedef struct viagem Viagem;
 
-struct viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct listaPassagensVendidas *listaPassagensVendidas, struct onibus *onibus);
+struct viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct onibus *onibus);
 
 struct viagem *criaViagem();
 
