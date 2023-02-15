@@ -77,21 +77,18 @@ void liberaViagem(Viagem *viagem) {
 }
 
 void liberaPassagemVendida(PassagemVendida *passagemVendida) {
+    liberaPassagem(passagemVendida->passagem);
     free(passagemVendida);
 }
 
 void liberaListaDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
     PassagemVendida *passagemVendidaAux = listaPassagensVendidas->inicio;
-    Passagem *passagemAux = listaPassagensVendidas->inicio->passagem;
 
     while (passagemVendidaAux != NULL) {
         PassagemVendida *passagemVendidaAux2 = passagemVendidaAux->proximo;
-        Passagem *passagemAux2 = passagemVendidaAux2->passagem;
 
-        liberaPassagem(passagemAux);
         liberaPassagemVendida(passagemVendidaAux);
 
-        passagemAux = passagemAux2;
         passagemVendidaAux = passagemVendidaAux2;
     }
 
