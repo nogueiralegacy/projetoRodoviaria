@@ -1,5 +1,5 @@
 #include "Passagem.h"
-#include "Passageiro.h"
+#include "TestPassagem.h"
 #include "stdio.h"
 
 #define ANSI_COLOR_RED "\x1b[31m"
