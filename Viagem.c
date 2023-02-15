@@ -170,3 +170,27 @@ void insereListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas
     }
     listaPassagensVendidas->quantidade++;
 }
+
+PassagemVendida *getInicioListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
+    return listaPassagensVendidas->inicio;
+}
+
+PassagemVendida *getFimListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
+    return listaPassagensVendidas->fim;
+}
+
+int getQuantidadeDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
+    return listaPassagensVendidas->quantidade;
+}
+
+void setInicioListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas, PassagemVendida *inicio) {
+    listaPassagensVendidas->inicio = inicio;
+}
+
+void setFimListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas, PassagemVendida *fim) {
+    listaPassagensVendidas->fim = fim;
+}
+
+void setQuantidadeDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas, int quantidade) {
+    listaPassagensVendidas->quantidade = quantidade;
+}
