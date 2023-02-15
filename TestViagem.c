@@ -29,6 +29,49 @@ void testIniciaPassagemVendida() {
     liberaPassagemVendida(passagemVendida);
 }
 
+
+void testIniciaListaDePassagensVendidas() {
+    // Cria passagem1 sem atributos
+    struct passagem *passagem1 = criaPassagem();
+
+    // Configura o código da passagem1
+    setCodigoDaPassagem(passagem1, "12345678910");
+
+    // Cria passagem2 sem atributos
+    struct passagem *passagem2 = criaPassagem();
+
+    // Configura o código da passagem2
+    setCodigoDaPassagem(passagem2, "10987654321");
+
+    // Instancia a lista de passagens vendidas
+    ListaPassagensVendidas *listaPassagensVendidas = iniciaListaPassagensVendidas();
+
+    // Insere passagemVendida1 e passagemVendida2 na lista
+    insereListaPassagensVendidas(listaPassagensVendidas, passagem1);
+    insereListaPassagensVendidas(listaPassagensVendidas, passagem2);
+
+    PassagemVendida *primeiraPassagemVendida = getInicioListaPassagensVendidas(listaPassagensVendidas);
+    PassagemVendida *segundaPassagemVendida = getProximo(primeiraPassagemVendida);
+
+    PassagemVendida *ultimaPassagemVendida = getFimListaPassagensVendidas(listaPassagensVendidas);
+    // Verifica se a lista de passagens vendidas foi instanciada corretamente
+    if (getCodigoDaPassagem(getPassagem(primeiraPassagemVendida)) == getCodigoDaPassagem(passagem1)) {
+        if (getCodigoDaPassagem(getPassagem(ultimaPassagemVendida)) == getCodigoDaPassagem(passagem2)) {
+            if (getCodigoDaPassagem(getPassagem(segundaPassagemVendida)) == getCodigoDaPassagem(passagem2)) {
+                if (getProximo(segundaPassagemVendida) == NULL) {
+                    printf(ANSI_COLOR_GREEN "testIniciaListaDePassagensVendidas(): Success!\n" ANSI_DEFAULT);
+                    liberaListaDePassagensVendidas(listaPassagensVendidas);
+                    return;
+                }
+            }
+        }
+    }
+
+    printf(ANSI_COLOR_RED "testIniciaListaDePassagensVendidas(): Failed!\n" ANSI_DEFAULT);
+    liberaListaDePassagensVendidas(listaPassagensVendidas);
+}
+
 void agrupaTestesViagem() {
     testIniciaPassagemVendida();
+    testIniciaListaDePassagensVendidas();
 }
