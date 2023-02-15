@@ -157,3 +157,16 @@ void setPassagem(PassagemVendida *passagemVendida, Passagem *passagem) {
 void setProximo(PassagemVendida *passagemVendida, PassagemVendida *proximo) {
     passagemVendida->proximo = proximo;
 }
+
+void insereListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas, Passagem *passagem) {
+    PassagemVendida *passagemVendida = iniciaPassagemVendida(passagem);
+
+    if (listaPassagensVendidas->quantidade == 0) {
+        listaPassagensVendidas->inicio = passagemVendida;
+        listaPassagensVendidas->fim = passagemVendida;
+    } else {
+        listaPassagensVendidas->fim->proximo = passagemVendida;
+        listaPassagensVendidas->fim = passagemVendida;
+    }
+    listaPassagensVendidas->quantidade++;
+}

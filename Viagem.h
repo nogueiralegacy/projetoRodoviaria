@@ -58,4 +58,7 @@ void setPassagem(struct passagemVendida *passagemVendida, struct passagem *passa
 
 void setProximo(struct passagemVendida *passagemVendida, struct passagemVendida *proximo);
 
+void insereListaPassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas, struct passagem *passagem);
+
+
 #endif //PROJETORODOVIARIA_VIAGEM_H
