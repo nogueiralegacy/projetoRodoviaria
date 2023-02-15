@@ -25,6 +25,8 @@ void testIniciaOnibusAssentos() {
             char **assento = getAssentos(onibus);
             if (assento[fileira][coluna] != 'L') {
                 printf(ANSI_COLOR_RED "testIniciaOnibusAssentos(): Failed!\n" ANSI_DEFAULT);
+                liberaOnibus(onibus);
+                return;
             }
         }
     }
