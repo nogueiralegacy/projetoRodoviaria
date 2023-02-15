@@ -35,10 +35,10 @@ void testIniciaPassagemAtributos() {
                 }
             }
         }
-    } else {
-        printf(ANSI_COLOR_RED "testIniciaPassagemAtributos(): Failed!\n" ANSI_DEFAULT);
-        liberaPassagem(passagem);
     }
+
+    printf(ANSI_COLOR_RED "testIniciaPassagemAtributos(): Failed!\n" ANSI_DEFAULT);
+    liberaPassagem(passagem);
 }
 
 void agrupaTestesPassagem() {
