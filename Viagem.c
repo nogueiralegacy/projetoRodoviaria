@@ -95,7 +95,7 @@ void liberaListaDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendid
         passagemVendidaAux = passagemVendidaAux2;
     }
 
-    liberaListaDePassagensVendidas(listaPassagensVendidas);
+    free(listaPassagensVendidas);
 }
 
 char *getCodigoDaViagem(Viagem *viagem) {
