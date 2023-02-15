@@ -21,8 +21,6 @@ void testIniciaPassageiroAtributos() {
                 if (strcmp(getEmail(passageiro), email) == 0) {
                     if (strcmp(getTelefoneDeEmergencia(passageiro), telefoneDeEmergencia) == 0) {
                         printf(ANSI_COLOR_GREEN "testIniciaPassageiroAtributos(): Success!\n" ANSI_DEFAULT);
-                        liberaPassageiro(passageiro);
-                        return;
                     }
                 }
             }
@@ -30,6 +28,7 @@ void testIniciaPassageiroAtributos() {
     } else {
         printf(ANSI_COLOR_RED "testIniciaPassageiroAtributos(): Failed!\n" ANSI_DEFAULT);
     }
+    liberaPassageiro(passageiro);
 }
 
 void agrupaTestesPassageiro() {
