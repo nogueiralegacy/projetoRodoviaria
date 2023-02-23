@@ -36,7 +36,7 @@ void testIniciaOnibusAssentos() {
     liberaOnibus(onibus);
 }
 
-void testPersistencia() {
+void testPersistenciaOnibus() {
     Onibus *onibus = iniciaOnibus("12345678910");
 
     setAssento(onibus, 0, 0);
@@ -67,6 +67,6 @@ void agrupaTestesOnibus() {
     printf("\n");
     testIniciaOnibusAssentos();
     printf("\n");
-    testPersistencia();
+    testPersistenciaOnibus();
     printf("\n");
 }
