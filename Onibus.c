@@ -32,6 +32,14 @@ Onibus *iniciaOnibus(char codigoDoOnibus[12]) {
     return onibus;
 }
 
+Onibus *criaOnibus() {
+    Onibus *onibus = (Onibus *) malloc(sizeof(Onibus));
+    strcpy(onibus->codigoDoOnibus, "");
+    onibus->assentos = criaAssentos(FILEIRAS, COLUNAS);
+    onibus->quantidadeDeAssentos = FILEIRAS * COLUNAS;
+    return onibus;
+}
+
 void liberaAssentos(char **assentos) {
     for (int indice = 0; indice < FILEIRAS; indice++) {
         free(assentos[indice]);
@@ -56,10 +64,45 @@ char **getAssentos(Onibus *onibus) {
     return onibus->assentos;
 }
 
+void setAssento(Onibus *onibus, int fileira, int coluna) {
+    onibus->assentos[fileira][coluna] = 'O';
+}
+
 int getQuantidadeDeFileiras(Onibus *onibus) {
     return FILEIRAS;
 }
 
 int getQuantidadeDeColunas(Onibus *onibus) {
     return COLUNAS;
+}
+
+void salvarOnibus(Onibus *onibus){
+    FILE *file;
+
+    file = fopen("onibus.dat", "w");
+    for (int i = 0; i < FILEIRAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            fprintf(file, "%c ", onibus->assentos[i][j]);
+        }
+    }
+
+    fprintf(file, "\n");
+    fprintf(file, "%s\n", onibus->codigoDoOnibus);
+    fprintf(file, "%d\n", onibus->quantidadeDeAssentos);
+    fclose(file);
+}
+
+void recuperaOnibus(Onibus *onibus) {
+    FILE *file;
+
+    file = fopen("onibus.dat", "r");
+    fseek(file, 0, SEEK_SET);
+    for (int i = 0; i < FILEIRAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            fscanf(file, "%c", &onibus->assentos[i][j]);
+        }
+    }
+    fscanf(file, "\n");
+    fscanf(file, "(%s)\n", onibus->codigoDoOnibus);
+    fscanf(file, "(%d)\n", &onibus->quantidadeDeAssentos);
 }
