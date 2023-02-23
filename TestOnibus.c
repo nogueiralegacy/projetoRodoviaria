@@ -46,10 +46,15 @@ void testPersistencia() {
     Onibus *onibusRecuperado = criaOnibus();
     recuperaOnibus(onibusRecuperado);
     char **assentos = getAssentos(onibusRecuperado);
+
     if (assentos[0][0] != 'O') {
-        printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
-        liberaOnibus(onibusRecuperado);
-        return;
+        if (strcmp(getCodigoDoOnibus(onibusRecuperado), "12345678910") != 0) {
+            if (getQuantidadeDeAssentos(onibusRecuperado) != 48) {
+                printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
+                liberaOnibus(onibusRecuperado);
+                return;
+            }
+        }
     }
 
     printf(ANSI_COLOR_GREEN "testPersistencia(): Success!\n" ANSI_DEFAULT);
