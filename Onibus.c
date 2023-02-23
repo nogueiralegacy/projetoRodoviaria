@@ -80,6 +80,7 @@ void salvarOnibus(Onibus *onibus, char *nomeDoArquivo) {
     FILE *file;
 
     file = fopen(nomeDoArquivo, "w");
+    fprintf(file, "(");
     for (int i = 0; i < FILEIRAS; i++) {
         for (int j = 0; j < COLUNAS; j++) {
             fprintf(file, "%c,", onibus->assentos[i][j]);
@@ -87,7 +88,7 @@ void salvarOnibus(Onibus *onibus, char *nomeDoArquivo) {
     }
 
     fprintf(file, "%s,", onibus->codigoDoOnibus);
-    fprintf(file, "%d\n", onibus->quantidadeDeAssentos);
+    fprintf(file, "%d)\n", onibus->quantidadeDeAssentos);
     fclose(file);
 }
 
@@ -96,11 +97,12 @@ void recuperaOnibus(Onibus *onibus, char *nomeDoArquivo) {
 
     file = fopen(nomeDoArquivo, "r");
     fseek(file, 0, SEEK_SET);
+    fscanf(file, "(");
     for (int i = 0; i < FILEIRAS; i++) {
         for (int j = 0; j < COLUNAS; j++) {
             fscanf(file, "%c,", &onibus->assentos[i][j]);
         }
     }
-    fscanf(file, "%s,", onibus->codigoDoOnibus);
-    fscanf(file, "%d\n", &onibus->quantidadeDeAssentos);
+    fscanf(file, "%[^,],", onibus->codigoDoOnibus);
+    fscanf(file, "%d)\n", &onibus->quantidadeDeAssentos);
 }
