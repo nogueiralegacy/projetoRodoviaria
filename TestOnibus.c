@@ -36,7 +36,28 @@ void testIniciaOnibusAssentos() {
     liberaOnibus(onibus);
 }
 
+void testPersistencia() {
+    Onibus *onibus = iniciaOnibus("12345678910");
+
+    setAssento(onibus, 0, 0);
+    salvarOnibus(onibus);
+    free(onibus);
+
+    Onibus *onibusRecuperado = criaOnibus();
+    recuperaOnibus(onibusRecuperado);
+    char **assentos = getAssentos(onibusRecuperado);
+    if (assentos[0][0] != 'O') {
+        printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
+        liberaOnibus(onibusRecuperado);
+        return;
+    }
+
+    printf(ANSI_COLOR_GREEN "testPersistencia(): Success!\n" ANSI_DEFAULT);
+    liberaOnibus(onibusRecuperado);
+}
+
 void agrupaTestesOnibus() {
     testIniciaOnibusCodigo();
     testIniciaOnibusAssentos();
+    testPersistencia();
 }
