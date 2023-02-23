@@ -57,7 +57,7 @@ void testPersistencia() {
         }
     }
 
-    printf(ANSI_COLOR_RED "testPersistencia(): FAIL!\n" ANSI_DEFAULT);
+    printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
     liberaOnibus(onibusRecuperado);
 }
 
