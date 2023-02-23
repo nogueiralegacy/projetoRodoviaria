@@ -62,7 +62,11 @@ void testPersistencia() {
 }
 
 void agrupaTestesOnibus() {
+    printf("------ Testes de Onibus.c ------\n");
     testIniciaOnibusCodigo();
+    printf("\n");
     testIniciaOnibusAssentos();
+    printf("\n");
     testPersistencia();
+    printf("\n");
 }

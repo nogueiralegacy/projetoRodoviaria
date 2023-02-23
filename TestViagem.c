@@ -76,6 +76,9 @@ void testInsereListaPassagensVendidas() {
 }
 
 void agrupaTestesViagem() {
+    printf("------ Testes Viagem.c -------\n");
     testIniciaPassagemVendida();
+    printf("\n");
     testInsereListaPassagensVendidas();
+    printf("\n");
 }

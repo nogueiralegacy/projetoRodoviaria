@@ -34,5 +34,7 @@ void testIniciaPassageiroAtributos() {
 }
 
 void agrupaTestesPassageiro() {
+    printf("------ Testes de Passageiro.c ------\n");
     testIniciaPassageiroAtributos();
+    printf("\n");
 }

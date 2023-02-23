@@ -42,5 +42,7 @@ void testIniciaPassagemAtributos() {
 }
 
 void agrupaTestesPassagem() {
+    printf("------ Testes de Passagem.c ------\n");
     testIniciaPassagemAtributos();
+    printf("\n");
 }
