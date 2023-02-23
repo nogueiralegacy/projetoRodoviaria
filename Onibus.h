@@ -31,8 +31,8 @@ void liberaAssentos(char **assentos);
 
 void liberaOnibus(Onibus *onibus);
 
-void salvarOnibus(struct onibus *onibus);
+void salvarOnibus(struct onibus *onibus, char *nomeArquivo);
 
-void recuperaOnibus(struct onibus *onibus);
+void recuperaOnibus(struct onibus *onibus, char *nomeArquivo);
 
 #endif //PROJETORODOVIARIA_ONIBUS_H
