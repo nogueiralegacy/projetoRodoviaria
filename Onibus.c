@@ -79,15 +79,14 @@ int getQuantidadeDeColunas(Onibus *onibus) {
 void salvarOnibus(Onibus *onibus){
     FILE *file;
 
-    file = fopen("onibus.dat", "w");
+    file = fopen("onibus.dat", "a");
     for (int i = 0; i < FILEIRAS; i++) {
         for (int j = 0; j < COLUNAS; j++) {
-            fprintf(file, "%c ", onibus->assentos[i][j]);
+            fprintf(file, "%c,", onibus->assentos[i][j]);
         }
     }
 
-    fprintf(file, "\n");
-    fprintf(file, "%s\n", onibus->codigoDoOnibus);
+    fprintf(file, "%s,", onibus->codigoDoOnibus);
     fprintf(file, "%d\n", onibus->quantidadeDeAssentos);
     fclose(file);
 }
@@ -99,10 +98,9 @@ void recuperaOnibus(Onibus *onibus) {
     fseek(file, 0, SEEK_SET);
     for (int i = 0; i < FILEIRAS; i++) {
         for (int j = 0; j < COLUNAS; j++) {
-            fscanf(file, "%c", &onibus->assentos[i][j]);
+            fscanf(file, "%c,", &onibus->assentos[i][j]);
         }
     }
-    fscanf(file, "\n");
-    fscanf(file, "(%s)\n", onibus->codigoDoOnibus);
-    fscanf(file, "(%d)\n", &onibus->quantidadeDeAssentos);
+    fscanf(file, "%[^,]", onibus->codigoDoOnibus);
+    fscanf(file, "%d\n", &onibus->quantidadeDeAssentos);
 }
