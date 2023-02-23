@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 
 #ifndef PROJETORODOVIARIA_PASSAGEIRO_H
 #define PROJETORODOVIARIA_PASSAGEIRO_H
@@ -49,5 +49,9 @@ void setTelefone(Passageiro *passageiro, char telefone[12]);
 void setEmail(Passageiro *passageiro, char email[50]);
 
 void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[12]);
+
+void salvaPassageiro(Passageiro *passageiro, char *nomeArquivo);
+
+void recuperaPassageiro(Passageiro *passageiro, char *nomeArquivo);
 
 #endif //PROJETORODOVIARIA_PASSAGEIRO_H

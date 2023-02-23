@@ -33,8 +33,39 @@ void testIniciaPassageiroAtributos() {
         liberaPassageiro(passageiro);
 }
 
+
+void testPersistenciaPassageiro() {
+    Passageiro *passageiro = criaPassageiro();
+
+    setNome(passageiro, "Daniel Nogueira");
+    setCpf(passageiro, "12345678910");
+    setEmail(passageiro, "daniel@gmail.com");
+    setTelefone(passageiro, "10987654321");
+    setTelefoneDeEmergencia(passageiro, "01020304050");
+
+    salvaPassageiro(passageiro, "passageiro.csv");
+    liberaPassageiro(passageiro);
+
+    Passageiro *passageiroRecuperado = criaPassageiro();
+
+    recuperaPassageiro(passageiroRecuperado, "passageiro.csv");
+
+    if (strcmp(getNome(passageiroRecuperado), "Daniel Nogueira") == 0) {
+        if (strcmp(getEmail(passageiroRecuperado), "daniel@gmail.com") == 0){
+            printf(ANSI_COLOR_GREEN "testPersistencia(): Sucess!\n" ANSI_DEFAULT);
+            liberaPassageiro(passageiroRecuperado);
+            return;
+        }
+    }
+
+    printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
+    liberaPassageiro(passageiroRecuperado);
+}
+
 void agrupaTestesPassageiro() {
     printf("------ Testes de Passageiro.c ------\n");
     testIniciaPassageiroAtributos();
+    printf("\n");
+    testPersistenciaPassageiro();
     printf("\n");
 }
