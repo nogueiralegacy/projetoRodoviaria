@@ -92,4 +92,5 @@ void recuperaPassageiro(Passageiro *passageiro, char *nomeArquivo) {
     fseek(arquivo, 0, SEEK_SET);
     fscanf(arquivo, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
            passageiro->telefoneDeEmergencia);
+    fclose(arquivo);
 }

@@ -105,4 +105,5 @@ void recuperaOnibus(Onibus *onibus, char *nomeDoArquivo) {
     }
     fscanf(file, "%[^,],", onibus->codigoDoOnibus);
     fscanf(file, "%d)\n", &onibus->quantidadeDeAssentos);
+    fclose(file);
 }
