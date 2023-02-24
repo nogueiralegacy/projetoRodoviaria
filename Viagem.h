@@ -16,7 +16,7 @@ struct listaPassagensVendidas *iniciaListaPassagensVendidas();
 
 typedef struct viagem Viagem;
 
-struct viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], time_t dataEHoraDeSaida, struct onibus *onibus);
+struct viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50], char origem[50], char destino[50], char dataEHoraDeSaida[16], struct onibus *onibus);
 
 struct viagem *criaViagem();
 
@@ -34,7 +34,7 @@ char *getOrigem(Viagem *viagem);
 
 char *getDestino(Viagem *viagem);
 
-time_t getDataEHoraDeSaida(Viagem *viagem);
+char *getDataEHoraDeSaida(Viagem *viagem);
 
 struct onibus *getOnibus(Viagem *viagem);
 
@@ -46,7 +46,7 @@ void setOrigem(Viagem *viagem, char origem[50]);
 
 void setDestino(Viagem *viagem, char destino[50]);
 
-void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida);
+void setDataEHoraDeSaida(Viagem *viagem, char dataEHoraDeSaida[16]);
 
 void setOnibus(Viagem *viagem, struct onibus *onibus);
 
@@ -71,5 +71,9 @@ void setInicioListaPassagensVendidas(struct listaPassagensVendidas *listaPassage
 void setFimListaPassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas, struct passagemVendida *fim);
 
 void setQuantidadeDePassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas, int quantidadeDePassagensVendidas);
+
+void salvaViagem(Viagem *viagem, char *nomeDoArquivo);
+
+void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagem);
 
 #endif //PROJETORODOVIARIA_VIAGEM_H

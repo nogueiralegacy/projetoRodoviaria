@@ -31,8 +31,28 @@ void testRecuperaPassagem() {
     liberaPassagem(passagem);
 }
 
+
+void testRecuperaTodasPassagens() {
+    Passagem **passagens = recuperaTodasPassagens("testPassagem.csv", "testPassageiro.csv");
+
+    if (strcmp(getCodigoDaPassagem(passagens[0]), "8070660") == 0) {
+        if (strcmp(getCodigoDaPassagem(passagens[1]), "201202") == 0) {
+             printf(ANSI_COLOR_GREEN "testRecuperaTodasPassagens(): Success!\n" ANSI_DEFAULT);
+             liberaPassagem(passagens[0]);
+             liberaPassagem(passagens[1]);
+            free(passagens);
+        }
+    }
+
+    printf(ANSI_COLOR_RED "testRecuperaTodasPassagens(): Failed!\n" ANSI_DEFAULT);
+    liberaPassagem(passagens[0]);
+    liberaPassagem(passagens[1]);
+    free(passagens);
+}
 void agrupaTestesPassagem() {
     printf("------ Testes de Passagem.c ------\n");
     testRecuperaPassagem();
+    printf("\n");
+    testRecuperaTodasPassagens();
     printf("\n");
 }

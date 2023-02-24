@@ -75,10 +75,32 @@ void testInsereListaPassagensVendidas() {
     liberaListaDePassagensVendidas(listaPassagensVendidas);
 }
 
+void testSalvaViagem() {
+    char *codigoViagem = "123";
+    char *origem = "São Paulo";
+    char *destino = "Rio de Janeiro";
+    char data[16] = "06/04/2023";
+    char *hora = "10:00";
+    char *companhia = "ES-INF";
+
+    strcat(data, " ");
+    strcat(data, hora);
+
+    Onibus *onibus = criaOnibus();
+    recuperaOnibus(onibus, "12345678910");
+
+    Viagem *viagem = iniciaViagem(codigoViagem, origem, destino, data, companhia, onibus);
+
+    salvaViagem(viagem, "testViagem.csv");
+}
+
+
 void agrupaTestesViagem() {
     printf("------ Testes Viagem.c -------\n");
     testIniciaPassagemVendida();
     printf("\n");
     testInsereListaPassagensVendidas();
+    printf("\n");
+    testSalvaViagem();
     printf("\n");
 }

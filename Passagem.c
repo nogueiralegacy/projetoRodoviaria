@@ -104,3 +104,23 @@ void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassage
     }
     fclose(arquivo);
 }
+
+Passagem **recuperaTodasPassagens(char *filePassagens, char *filePassageiros) {
+    FILE *arquivo;
+    arquivo = fopen(filePassagens, "r");
+    Passageiro *passageiro = criaPassageiro();
+    char linha[200];
+    Passagem **passagens = NULL;
+
+    while (fgets(linha, 200, arquivo) != NULL) {
+        char cpf[12];
+        Passagem *passagem = criaPassagem();
+        sscanf(linha, FORMATO_PASSAGEM_IN, cpf, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
+        recuperaPassageiro(passageiro, filePassageiros, cpf);
+        setPassageiro(passagem, passageiro);
+        passagens = (Passagem **) realloc(passagens, sizeof(passagens) + sizeof(Passagem *));
+    }
+    fclose(arquivo);
+
+    return passagens;
+}

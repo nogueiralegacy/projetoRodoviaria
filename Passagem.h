@@ -57,4 +57,6 @@ void salvaPassagem(Passagem *passagem, char *nomeDoArquivo);
 
 void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassageiros, char *codigoDaPassagem);
 
+Passagem **recuperaTodasPassagens(char *filePassagens, char *filePassageiros);
+
 #endif //PROJETORODOVIARIA_PASSAGEM_H
