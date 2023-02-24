@@ -18,6 +18,10 @@ void setQuantidadeDeAssentos(Onibus *onibus, int quantidadeDeAssentos);
 
 char **getAssentos(Onibus *onibus);
 
+void setAssento(Onibus *onibus, int fileira, int coluna);
+
+int assentoVazio(Onibus *onibus, int fileira, int coluna);
+
 int getQuantidadeDeFileiras(Onibus *onibus);
 
 int getQuantidadeDeColunas(Onibus *onibus);
