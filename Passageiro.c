@@ -80,17 +80,24 @@ void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[1
 }
 
 void salvaPassageiro(Passageiro *passageiro, char *nomeArquivo) {
-    FILE *arquivo = fopen(nomeArquivo, "w");
+    FILE *arquivo = fopen(nomeArquivo, "a");
 
     fprintf(arquivo, FORMATO_PASSAGEIRO_OUT, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
             passageiro->telefoneDeEmergencia);
     fclose(arquivo);
 }
 
-void recuperaPassageiro(Passageiro *passageiro, char *nomeArquivo) {
-    FILE *arquivo = fopen(nomeArquivo, "r");
-    fseek(arquivo, 0, SEEK_SET);
-    fscanf(arquivo, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
-           passageiro->telefoneDeEmergencia);
+void recuperaPassageiro(Passageiro *passageiro, char *nomeDoArquivo, char *cpf) {
+    FILE *arquivo;
+    arquivo = fopen(nomeDoArquivo, "r");
+
+    char linha[200];
+    while (fgets(linha, 200, arquivo) != NULL) {
+        sscanf(linha, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+               passageiro->telefoneDeEmergencia);
+        if (strcmp(passageiro->cpf, cpf) == 0) {
+            break;
+        }
+    }
     fclose(arquivo);
 }

@@ -52,6 +52,5 @@ void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[1
 
 void salvaPassageiro(Passageiro *passageiro, char *nomeArquivo);
 
-void recuperaPassageiro(Passageiro *passageiro, char *nomeArquivo);
-
+void recuperaPassageiro(Passageiro *passageiro, char *nomeArquivo, char *cpf);
 #endif //PROJETORODOVIARIA_PASSAGEIRO_H
