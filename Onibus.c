@@ -75,6 +75,7 @@ int getQuantidadeDeFileiras(Onibus *onibus) {
 int getQuantidadeDeColunas(Onibus *onibus) {
     return COLUNAS;
 }
+
 void salvarOnibus(Onibus *onibus, char *nomeDoArquivo) {
     FILE *file;
 
@@ -107,4 +108,3 @@ void recuperaOnibus(Onibus *onibus, char *nomeDoArquivo) {
     fscanf(file, "%d)\n", &onibus->quantidadeDeAssentos);
     fclose(file);
 }
->>>>>>> Stashed changes
