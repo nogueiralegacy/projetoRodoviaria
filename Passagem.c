@@ -1,11 +1,15 @@
 #include "Passagem.h"
 
+//No arquivo de passagem será guardado o CPF do passageiro
+const char *FORMATO_PASSAGEM_OUT = "(%s,%s,%d,%d,%f)\n";
+const char *FORMATO_PASSAGEM_IN = "(%[^,],%[^,],%d,%d,%f)\n";
+
 struct passagem {
+    struct passageiro *passageiro;
     char codigoDaPassagem[12];
     int fileira;
     int coluna;
     float valor;
-    struct passageiro *passageiro;
 };
 
 typedef struct passagem Passagem;
@@ -74,4 +78,56 @@ void setValor(Passagem *passagem, float valor) {
 
 void setPassageiro(Passagem *passagem, struct passageiro *passageiro) {
     passagem->passageiro = passageiro;
+}
+
+void salvaPassagem(Passagem *passagem, char *nomeDoArquivo) {
+    FILE *file;
+
+    file = fopen(nomeDoArquivo, "a");
+    fprintf(file, FORMATO_PASSAGEM_OUT, getCpf(passagem->passageiro), passagem->codigoDaPassagem, passagem->fileira, passagem->coluna, passagem->valor);
+    fclose(file);
+}
+
+void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassageiros, char *codigoDaPassagem) {
+    FILE *arquivo;
+    arquivo = fopen(filePassagens, "r");
+    Passageiro *passageiro = criaPassageiro();
+    char linha[200];
+    while (fgets(linha, 200, arquivo) != NULL) {
+        char cpf[12];
+        sscanf(linha, FORMATO_PASSAGEM_IN, cpf, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
+        recuperaPassageiro(passageiro, filePassageiros, cpf);
+        setPassageiro(passagem, passageiro);
+        if (strcmp(passagem->codigoDaPassagem, codigoDaPassagem) == 0) {
+            break;
+        }
+    }
+    fclose(arquivo);
+}
+
+Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePassageiros) {
+    FILE *arquivo;
+    arquivo = fopen(filePassagens, "r");
+
+
+
+    char linha[200];
+    Passagem **passagens = (Passagem **) malloc(sizeof(Passagem *) * 10);
+    *indice = 0;
+    while (fgets(linha, 200, arquivo) != NULL) {
+        char cpf[12];
+        Passagem *passagem = criaPassagem();
+        Passageiro *passageiro = criaPassageiro();
+
+        sscanf(linha, FORMATO_PASSAGEM_IN, cpf, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
+
+        recuperaPassageiro(passageiro, filePassageiros, cpf);
+        setPassageiro(passagem, passageiro);
+        passagens[*indice] = passagem;
+        *indice = *indice + 1;
+    }
+
+    fclose(arquivo);
+
+    return passagens;
 }

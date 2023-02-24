@@ -1,5 +1,8 @@
 #include "Passageiro.h"
 
+const char *FORMATO_PASSAGEIRO_OUT = "(%s,%s,%s,%s,%s)\n";
+const char *FORMATO_PASSAGEIRO_IN = "(%[^,],%[^,],%[^,],%[^,],%[^)])\n";
+
 struct passageiro {
     char nome[50];
     char cpf[12];
@@ -76,3 +79,25 @@ void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[1
     strcpy(passageiro->telefoneDeEmergencia, telefoneDeEmergencia);
 }
 
+void salvaPassageiro(Passageiro *passageiro, char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "a");
+
+    fprintf(arquivo, FORMATO_PASSAGEIRO_OUT, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+            passageiro->telefoneDeEmergencia);
+    fclose(arquivo);
+}
+
+void recuperaPassageiro(Passageiro *passageiro, char *nomeDoArquivo, char *cpf) {
+    FILE *arquivo;
+    arquivo = fopen(nomeDoArquivo, "r");
+
+    char linha[200];
+    while (fgets(linha, 200, arquivo) != NULL) {
+        sscanf(linha, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+               passageiro->telefoneDeEmergencia);
+        if (strcmp(passageiro->cpf, cpf) == 0) {
+            break;
+        }
+    }
+    fclose(arquivo);
+}

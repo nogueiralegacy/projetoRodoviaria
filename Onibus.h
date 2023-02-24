@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #ifndef PROJETORODOVIARIA_ONIBUS_H
 #define PROJETORODOVIARIA_ONIBUS_H
@@ -7,6 +8,8 @@
 typedef struct onibus Onibus;
 
 struct onibus *iniciaOnibus(char codigoDoOnibus[12]);
+
+struct onibus *criaOnibus();
 
 char **criaAssentos(int qntFileira, int qntColunas);
 
@@ -29,5 +32,9 @@ int getQuantidadeDeColunas(Onibus *onibus);
 void liberaAssentos(char **assentos);
 
 void liberaOnibus(Onibus *onibus);
+
+void salvarOnibus(struct onibus *onibus, char *nomeArquivo);
+
+void recuperaOnibus(struct onibus *onibus, char *nomeArquivo);
 
 #endif //PROJETORODOVIARIA_ONIBUS_H

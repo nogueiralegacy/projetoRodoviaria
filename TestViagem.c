@@ -75,7 +75,33 @@ void testInsereListaPassagensVendidas() {
     liberaListaDePassagensVendidas(listaPassagensVendidas);
 }
 
+void testRecuperaViagem() {
+    Viagem *viagem = criaViagem();
+
+    recuperaViagem(viagem, "testViagem.csv", "testOnibus.csv", "testPassagem.csv", "testPassageiro.csv");
+
+    char *codigoDoOnibus = getCodigoDoOnibus(getOnibus(viagem));
+    PassagemVendida *passagemVendida = getPrimeiraPassagemVendida(viagem);
+    char *codigoDaPassagem = getCodigoDaPassagem(getPassagem(passagemVendida));
+
+    if (strcmp(codigoDoOnibus, "20122002") == 0) {
+        if (strcmp(codigoDaPassagem, "241202") == 0) {
+            printf(ANSI_COLOR_GREEN "testRecuperaViagem(): Success!\n" ANSI_DEFAULT);
+            liberaViagem(viagem);
+            return;
+        }
+    }
+
+    printf(ANSI_COLOR_RED "testRecuperaViagem(): Failed!\n" ANSI_DEFAULT);
+    liberaViagem(viagem);
+}
+
 void agrupaTestesViagem() {
+    printf("------ Testes Viagem.c -------\n");
     testIniciaPassagemVendida();
+    printf("\n");
     testInsereListaPassagensVendidas();
+    printf("\n");
+    testRecuperaViagem();
+    printf("\n");
 }

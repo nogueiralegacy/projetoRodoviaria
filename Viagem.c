@@ -1,5 +1,8 @@
 #include "Viagem.h"
 
+const char *FORMATO_VIAGEM_OUT = "(%s,%s,%s,%s,%s)\n";
+const char *FORMATO_VIAGEM_IN = "(%[^,],%[^,],%[^,],%[^,],%[^)])\n";
+
 struct passagemVendida {
     struct passagem *passagem;
     struct passagemVendida *proximo;
@@ -37,7 +40,7 @@ struct viagem {
     char companhia[50];
     char origem[50];
     char destino[50];
-    time_t dataEHoraDeSaida;
+    char dataEHoraDeSaida[16];
     // Passagens vendidas
     struct listaPassagensVendidas *listaPassagensVendidas;
     struct onibus *onibus;
@@ -46,14 +49,15 @@ struct viagem {
 typedef struct viagem Viagem;
 
 Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50],
-                     char origem[50], char destino[50], time_t dataEHoraDeSaida, struct onibus *onibus) {
+                     char origem[50], char destino[50], char dataEHoraDeSaida[16], struct onibus *onibus) {
+                     
     Viagem *viagem = (Viagem *) malloc(sizeof(Viagem));
 
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
     strcpy(viagem->companhia, companhia);
     strcpy(viagem->origem, origem);
     strcpy(viagem->destino, destino);
-    viagem->dataEHoraDeSaida = dataEHoraDeSaida;
+    strcpy(viagem->dataEHoraDeSaida, dataEHoraDeSaida);
     viagem->listaPassagensVendidas = iniciaListaPassagensVendidas();
     viagem->onibus = onibus;
 
@@ -66,8 +70,8 @@ Viagem *criaViagem() {
     strcpy(viagem->companhia, "");
     strcpy(viagem->origem, "");
     strcpy(viagem->destino, "");
-    viagem->dataEHoraDeSaida = 0;
-    viagem->listaPassagensVendidas = NULL;
+    strcpy(viagem->dataEHoraDeSaida, "");
+    viagem->listaPassagensVendidas = iniciaListaPassagensVendidas();
     viagem->onibus = NULL;
 
     return viagem;
@@ -112,7 +116,7 @@ char *getDestino(Viagem *viagem) {
     return viagem->destino;
 }
 
-time_t getDataEHoraDeSaida(Viagem *viagem) {
+char *getDataEHoraDeSaida(Viagem *viagem) {
     return viagem->dataEHoraDeSaida;
 }
 
@@ -136,8 +140,8 @@ void setDestino(Viagem *viagem, char destino[50]) {
     strcpy(viagem->destino, destino);
 }
 
-void setDataEHoraDeSaida(Viagem *viagem, time_t dataEHoraDeSaida) {
-    viagem->dataEHoraDeSaida = dataEHoraDeSaida;
+void setDataEHoraDeSaida(Viagem *viagem, char dataEHoraDeSaida[16]) {
+    strcpy(viagem->dataEHoraDeSaida, dataEHoraDeSaida);
 }
 void setOnibus(Viagem *viagem, Onibus *onibus) {
     viagem->onibus = onibus;
@@ -176,6 +180,10 @@ PassagemVendida *getInicioListaPassagensVendidas(ListaPassagensVendidas *listaPa
     return listaPassagensVendidas->inicio;
 }
 
+PassagemVendida *getPrimeiraPassagemVendida(Viagem *viagem) {
+    return viagem->listaPassagensVendidas->inicio;
+}
+
 PassagemVendida *getFimListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
     return listaPassagensVendidas->fim;
 }
@@ -194,4 +202,32 @@ void setFimListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas
 
 void setQuantidadeDePassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas, int quantidade) {
     listaPassagensVendidas->quantidade = quantidade;
+}
+
+void salvaViagem(Viagem *viagem, char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "w");
+
+    fprintf(arquivo, FORMATO_VIAGEM_OUT, viagem->codigoDaViagem, viagem->companhia, viagem->origem, viagem->destino, viagem->dataEHoraDeSaida);
+
+    fclose(arquivo);
+}
+
+void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagens, char *filePassageiros) {
+    FILE *arquivo = fopen(fileViagem, "r");
+
+    fscanf(arquivo, FORMATO_VIAGEM_IN, viagem->codigoDaViagem, viagem->companhia, viagem->origem, viagem->destino, viagem->dataEHoraDeSaida);
+
+    Onibus *onibus = criaOnibus();
+    recuperaOnibus(onibus, fileOnibus);
+    viagem->onibus = onibus;
+
+    int *indice = (int *) malloc(sizeof(int));
+    *indice = 0;
+    Passagem **passagens = recuperaTodasPassagens(indice, filePassagens, filePassageiros);
+
+    for (int count = 0; count < *indice; count++) {
+        insereListaPassagensVendidas(viagem->listaPassagensVendidas, passagens[count]);
+    }
+
+    fclose(arquivo);
 }

@@ -36,7 +36,31 @@ void testIniciaOnibusAssentos() {
     liberaOnibus(onibus);
 }
 
+void testPersistenciaOnibus() {
+    Onibus *onibusRecuperado = criaOnibus();
+    recuperaOnibus(onibusRecuperado, "testOnibus.csv");
+    char **assentos = getAssentos(onibusRecuperado);
+
+    if (assentos[0][0] == 'O') {
+        if (strcmp(getCodigoDoOnibus(onibusRecuperado), "20122002") == 0) {
+            if (getQuantidadeDeAssentos(onibusRecuperado) == 48) {
+                printf(ANSI_COLOR_GREEN "testPersistencia(): Success!\n" ANSI_DEFAULT);
+                liberaOnibus(onibusRecuperado);
+                return;
+            }
+        }
+    }
+
+    printf(ANSI_COLOR_RED "testPersistencia(): Failed!\n" ANSI_DEFAULT);
+    liberaOnibus(onibusRecuperado);
+}
+
 void agrupaTestesOnibus() {
+    printf("------ Testes de Onibus.c ------\n");
     testIniciaOnibusCodigo();
+    printf("\n");
     testIniciaOnibusAssentos();
+    printf("\n");
+    testPersistenciaOnibus();
+    printf("\n");
 }

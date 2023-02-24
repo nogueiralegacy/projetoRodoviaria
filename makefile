@@ -2,9 +2,8 @@ all: projeto
 
 #Constroi e compila o projeto
 projeto:
-	gcc -o projeto main.c
 	gcc -o projeto main.c Interface.c
->>>>>>> Stashed changes
+
 #Apaga o arquivo executavel
 clean:
 	del projeto.exe

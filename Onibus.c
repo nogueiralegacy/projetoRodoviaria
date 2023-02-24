@@ -32,6 +32,14 @@ Onibus *iniciaOnibus(char codigoDoOnibus[12]) {
     return onibus;
 }
 
+Onibus *criaOnibus() {
+    Onibus *onibus = (Onibus *) malloc(sizeof(Onibus));
+    strcpy(onibus->codigoDoOnibus, "");
+    onibus->assentos = criaAssentos(FILEIRAS, COLUNAS);
+    onibus->quantidadeDeAssentos = FILEIRAS * COLUNAS;
+    return onibus;
+}
+
 void liberaAssentos(char **assentos) {
     for (int indice = 0; indice < FILEIRAS; indice++) {
         free(assentos[indice]);
@@ -60,6 +68,7 @@ void setAssento(Onibus *onibus, int fileira, int coluna) {
     onibus->assentos[fileira][coluna] = 'O';
 }
 
+
 int assentoVazio(Onibus *onibus, int fileira, int coluna) {
     if (onibus->assentos[fileira][coluna] == 'L') {
         return 1;
@@ -67,6 +76,7 @@ int assentoVazio(Onibus *onibus, int fileira, int coluna) {
         return 0;
     }
 }
+
 
 int getQuantidadeDeFileiras(Onibus *onibus) {
     return FILEIRAS;
@@ -103,7 +113,6 @@ void recuperaOnibus(Onibus *onibus, char *nomeDoArquivo) {
             fscanf(file, "%c,", &onibus->assentos[i][j]);
         }
     }
-
     fscanf(file, "%[^,],", onibus->codigoDoOnibus);
     fscanf(file, "%d)\n", &onibus->quantidadeDeAssentos);
     fclose(file);
