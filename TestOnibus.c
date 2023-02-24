@@ -37,18 +37,12 @@ void testIniciaOnibusAssentos() {
 }
 
 void testPersistenciaOnibus() {
-    Onibus *onibus = iniciaOnibus("12345678910");
-
-    setAssento(onibus, 0, 0);
-    salvarOnibus(onibus, "testOnibus.csv");
-    free(onibus);
-
     Onibus *onibusRecuperado = criaOnibus();
     recuperaOnibus(onibusRecuperado, "testOnibus.csv");
     char **assentos = getAssentos(onibusRecuperado);
 
     if (assentos[0][0] == 'O') {
-        if (strcmp(getCodigoDoOnibus(onibusRecuperado), "12345678910") == 0) {
+        if (strcmp(getCodigoDoOnibus(onibusRecuperado), "20122002") == 0) {
             if (getQuantidadeDeAssentos(onibusRecuperado) == 48) {
                 printf(ANSI_COLOR_GREEN "testPersistencia(): Success!\n" ANSI_DEFAULT);
                 liberaOnibus(onibusRecuperado);

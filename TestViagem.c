@@ -75,25 +75,26 @@ void testInsereListaPassagensVendidas() {
     liberaListaDePassagensVendidas(listaPassagensVendidas);
 }
 
-void testSalvaViagem() {
-    char *codigoViagem = "123";
-    char *origem = "São Paulo";
-    char *destino = "Rio de Janeiro";
-    char data[16] = "06/04/2023";
-    char *hora = "10:00";
-    char *companhia = "ES-INF";
+void testRecuperaViagem() {
+    Viagem *viagem = criaViagem();
 
-    strcat(data, " ");
-    strcat(data, hora);
+    recuperaViagem(viagem, "testViagem.csv", "testOnibus.csv", "testPassagem.csv", "testPassageiro.csv");
 
-    Onibus *onibus = criaOnibus();
-    recuperaOnibus(onibus, "12345678910");
+    char *codigoDoOnibus = getCodigoDoOnibus(getOnibus(viagem));
+    PassagemVendida *passagemVendida = getPrimeiraPassagemVendida(viagem);
+    char *codigoDaPassagem = getCodigoDaPassagem(getPassagem(passagemVendida));
 
-    Viagem *viagem = iniciaViagem(codigoViagem, origem, destino, data, companhia, onibus);
+    if (strcmp(codigoDoOnibus, "20122002") == 0) {
+        if (strcmp(codigoDaPassagem, "241202") == 0) {
+            printf(ANSI_COLOR_GREEN "testRecuperaViagem(): Success!\n" ANSI_DEFAULT);
+            liberaViagem(viagem);
+            return;
+        }
+    }
 
-    salvaViagem(viagem, "testViagem.csv");
+    printf(ANSI_COLOR_RED "testRecuperaViagem(): Failed!\n" ANSI_DEFAULT);
+    liberaViagem(viagem);
 }
-
 
 void agrupaTestesViagem() {
     printf("------ Testes Viagem.c -------\n");
@@ -101,6 +102,6 @@ void agrupaTestesViagem() {
     printf("\n");
     testInsereListaPassagensVendidas();
     printf("\n");
-    testSalvaViagem();
+    testRecuperaViagem();
     printf("\n");
 }

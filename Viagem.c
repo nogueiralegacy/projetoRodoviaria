@@ -70,7 +70,7 @@ Viagem *criaViagem() {
     strcpy(viagem->origem, "");
     strcpy(viagem->destino, "");
     strcpy(viagem->dataEHoraDeSaida, "");
-    viagem->listaPassagensVendidas = NULL;
+    viagem->listaPassagensVendidas = iniciaListaPassagensVendidas();
     viagem->onibus = NULL;
 
     return viagem;
@@ -178,6 +178,10 @@ PassagemVendida *getInicioListaPassagensVendidas(ListaPassagensVendidas *listaPa
     return listaPassagensVendidas->inicio;
 }
 
+PassagemVendida *getPrimeiraPassagemVendida(Viagem *viagem) {
+    return viagem->listaPassagensVendidas->inicio;
+}
+
 PassagemVendida *getFimListaPassagensVendidas(ListaPassagensVendidas *listaPassagensVendidas) {
     return listaPassagensVendidas->fim;
 }
@@ -206,7 +210,7 @@ void salvaViagem(Viagem *viagem, char *nomeArquivo) {
     fclose(arquivo);
 }
 
-void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagens) {
+void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagens, char *filePassageiros) {
     FILE *arquivo = fopen(fileViagem, "r");
 
     fscanf(arquivo, FORMATO_VIAGEM_IN, viagem->codigoDaViagem, viagem->companhia, viagem->origem, viagem->destino, viagem->dataEHoraDeSaida);
@@ -215,6 +219,13 @@ void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *fi
     recuperaOnibus(onibus, fileOnibus);
     viagem->onibus = onibus;
 
+    int *indice = (int *) malloc(sizeof(int));
+    *indice = 0;
+    Passagem **passagens = recuperaTodasPassagens(indice, filePassagens, filePassageiros);
+
+    for (int count = 0; count < *indice; count++) {
+        insereListaPassagensVendidas(viagem->listaPassagensVendidas, passagens[count]);
+    }
 
     fclose(arquivo);
 }

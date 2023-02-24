@@ -17,10 +17,10 @@ void testRecuperaPassagem() {
                 if (getValor(passagem) == 100.00) {
                     if (strcmp(getCpf(getPassageiro(passagem)), "02037477148") == 0) {
                         if (strcmp(getNome(getPassageiro(passagem)), "Pedro Alberto") == 0) {
-                        printf(ANSI_COLOR_GREEN "testRecuperaPassagem(): Success!\n" ANSI_DEFAULT);
-                        liberaPassagem(passagem);
-                        return;
-                    }
+                            printf(ANSI_COLOR_GREEN "testRecuperaPassagem(): Success!\n" ANSI_DEFAULT);
+                            liberaPassagem(passagem);
+                            return;
+                        }
                     }
                 }
             }
@@ -33,14 +33,16 @@ void testRecuperaPassagem() {
 
 
 void testRecuperaTodasPassagens() {
-    Passagem **passagens = recuperaTodasPassagens("testPassagem.csv", "testPassageiro.csv");
+    int *indice = (int *) malloc(sizeof(int));
+    Passagem **passagens = recuperaTodasPassagens(indice, "testPassagem.csv", "testPassageiro.csv");
 
-    if (strcmp(getCodigoDaPassagem(passagens[0]), "8070660") == 0) {
-        if (strcmp(getCodigoDaPassagem(passagens[1]), "201202") == 0) {
+    if (strcmp(getCodigoDaPassagem(passagens[1]), "8070660") == 0) {
+        if (strcmp(getCodigoDaPassagem(passagens[0]), "241202") == 0) {
              printf(ANSI_COLOR_GREEN "testRecuperaTodasPassagens(): Success!\n" ANSI_DEFAULT);
              liberaPassagem(passagens[0]);
              liberaPassagem(passagens[1]);
             free(passagens);
+            return;
         }
     }
 

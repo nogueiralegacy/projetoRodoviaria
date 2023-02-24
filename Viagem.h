@@ -62,6 +62,8 @@ void insereListaPassagensVendidas(struct listaPassagensVendidas *listaPassagensV
 
 struct passagemVendida *getInicioListaPassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas);
 
+struct passagemVendida *getPrimeiraPassagemVendida(struct viagem *viagem);
+
 struct passagemVendida *getFimListaPassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas);
 
 int getQuantidadeDePassagensVendidas(struct listaPassagensVendidas *listaPassagensVendidas);
@@ -74,6 +76,6 @@ void setQuantidadeDePassagensVendidas(struct listaPassagensVendidas *listaPassag
 
 void salvaViagem(Viagem *viagem, char *nomeDoArquivo);
 
-void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagem);
+void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagem, char *filePassageiro);
 
 #endif //PROJETORODOVIARIA_VIAGEM_H
