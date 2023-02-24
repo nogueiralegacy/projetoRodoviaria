@@ -40,11 +40,11 @@ void testPersistenciaOnibus() {
     Onibus *onibus = iniciaOnibus("12345678910");
 
     setAssento(onibus, 0, 0);
-    salvarOnibus(onibus, "onibus.csv");
+    salvarOnibus(onibus, "testOnibus.csv");
     free(onibus);
 
     Onibus *onibusRecuperado = criaOnibus();
-    recuperaOnibus(onibusRecuperado, "onibus.csv");
+    recuperaOnibus(onibusRecuperado, "testOnibus.csv");
     char **assentos = getAssentos(onibusRecuperado);
 
     if (assentos[0][0] == 'O') {
