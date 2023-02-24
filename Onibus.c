@@ -56,6 +56,18 @@ char **getAssentos(Onibus *onibus) {
     return onibus->assentos;
 }
 
+void setAssento(Onibus *onibus, int fileira, int coluna) {
+    onibus->assentos[fileira][coluna] = 'O';
+}
+
+int assentoVazio(Onibus *onibus, int fileira, int coluna) {
+    if (onibus->assentos[fileira][coluna] == 'L') {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 int getQuantidadeDeFileiras(Onibus *onibus) {
     return FILEIRAS;
 }
@@ -63,3 +75,36 @@ int getQuantidadeDeFileiras(Onibus *onibus) {
 int getQuantidadeDeColunas(Onibus *onibus) {
     return COLUNAS;
 }
+void salvarOnibus(Onibus *onibus, char *nomeDoArquivo) {
+    FILE *file;
+
+    file = fopen(nomeDoArquivo, "w");
+    fprintf(file, "(");
+    for (int i = 0; i < FILEIRAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            fprintf(file, "%c,", onibus->assentos[i][j]);
+        }
+    }
+
+    fprintf(file, "%s,", onibus->codigoDoOnibus);
+    fprintf(file, "%d)\n", onibus->quantidadeDeAssentos);
+    fclose(file);
+}
+
+void recuperaOnibus(Onibus *onibus, char *nomeDoArquivo) {
+    FILE *file;
+
+    file = fopen(nomeDoArquivo, "r");
+    fseek(file, 0, SEEK_SET);
+    fscanf(file, "(");
+    for (int i = 0; i < FILEIRAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            fscanf(file, "%c,", &onibus->assentos[i][j]);
+        }
+    }
+
+    fscanf(file, "%[^,],", onibus->codigoDoOnibus);
+    fscanf(file, "%d)\n", &onibus->quantidadeDeAssentos);
+    fclose(file);
+}
+>>>>>>> Stashed changes
