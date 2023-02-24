@@ -53,4 +53,8 @@ void setValor(Passagem *passagem, float valor);
 
 void setPassageiro(Passagem *passagem, struct passageiro *passageiro);
 
+void salvaPassagem(Passagem *passagem, char *nomeDoArquivo);
+
+void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassageiros, char *codigoDaPassagem);
+
 #endif //PROJETORODOVIARIA_PASSAGEM_H
