@@ -46,7 +46,7 @@ struct viagem {
 typedef struct viagem Viagem;
 
 Viagem *iniciaViagem(char codigoDaViagem[12], char companhia[50],
-                     char origem[50],char destino[50],time_t dataEHoraDeSaida, struct onibus *onibus) {
+                     char origem[50], char destino[50], time_t dataEHoraDeSaida, struct onibus *onibus) {
     Viagem *viagem = (Viagem *) malloc(sizeof(Viagem));
 
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
@@ -72,6 +72,7 @@ Viagem *criaViagem() {
 
     return viagem;
 }
+
 void liberaViagem(Viagem *viagem) {
     free(viagem);
 }
