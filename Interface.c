@@ -110,14 +110,14 @@ void viagensDisponiveis(Viagem *viagem) {
     /* vai receber as viagens da persistencia */
     printf("++++++ VIAGENS  DISPONIVEIS ++++++\n\n");
 
-    printf("+--------------------------------+\n");
-    printf("| -> Partindo de: %20s |\n", getOrigem(viagem));
+    printf("+------------------------------------+\n");
+    printf("| -> Partindo de: %18s |\n", getOrigem(viagem));
     printf("| <- Indo para: %20s |\n", getDestino(viagem));
     printf("| Horario de Saida: %11s |\n", getDataEHoraDeSaida(viagem));
-    printf("| COMPANHIA %20s |\n", getCompanhia(viagem));
-    printf("| ONIBUS N %20s |\n", getCodigoDoOnibus(getOnibus(viagem)));
-    printf("| Valor da passagem: R$ 375,00   |\n");
-    printf("+--------------------------------+\n\n");
+    printf("| COMPANHIA %24s |\n", getCompanhia(viagem));
+    printf("| ONIBUS N %25s |\n", getCodigoDoOnibus(getOnibus(viagem)));
+    printf("| Valor da passagem:       R$ 375,00 |\n");
+    printf("+------------------------------------+\n\n");
 }
 
 void iniciaMenu(int isWindows) {
