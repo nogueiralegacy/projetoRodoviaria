@@ -117,11 +117,9 @@ void removerPassageiro(char *nomeDoArquivo , char *cpf) {
     char linha[200];
     while (fgets(linha, 200, arquivo) != NULL) {
 
-        sscanf(linha, "%s", passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+        sscanf(linha, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
                passageiro->telefoneDeEmergencia);
-
-        printf("%s\n", passageiro->nome);
-
+        
         if (strcmp(passageiro->cpf, cpf) != 0) {
             fprintf(arquivoTemporario, "%s", linha);
         }
