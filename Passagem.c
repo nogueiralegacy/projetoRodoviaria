@@ -130,3 +130,32 @@ Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePa
 
     return passagens;
 }
+
+void removePassagem (Onibus *onibus, char *filePassagens, char *filePassageiros , char *cpf) {
+    FILE *arquivo = fopen(filePassagens, "r");
+    FILE* arquivoTemporario = fopen("tempPassagens.csv", "a+");
+
+    removerPassageiro(filePassageiros, cpf);
+    Passagem *passagem = criaPassagem();
+    char linha[200];
+    while (fgets(linha, 200, arquivo) != NULL) {
+        char cpfTemp[12];
+
+        sscanf(linha, FORMATO_PASSAGEM_IN, cpfTemp, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
+
+        if (strcmp(cpfTemp, cpf) != 0) {
+            fprintf(arquivoTemporario, "%s", linha);
+        }
+        else {
+            recuperaOnibus(onibus, "onibus.csv");
+            desocupaAssento(onibus, passagem->fileira, passagem->coluna);
+            salvarOnibus(onibus, "onibus.csv");
+        }
+    }
+
+    fclose(arquivo);
+    fclose(arquivoTemporario);
+
+    remove(filePassagens);
+    rename("tempPassagens.csv", filePassagens);
+}

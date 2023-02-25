@@ -112,8 +112,9 @@ int main() {
                 printf("\n");
 
                 cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
-                removerPassageiro("passageiro.csv", cpfTemp);
-
+                removePassagem(getOnibus(viagemDisponivel), "passagem.csv", "passageiro.csv", cpfTemp);
+                passagemCancelada();
+                pausa(isWindows);
                 break;
             case 3: /* Vizualizar a situacao de todos os acentos */
                 exibirAcentos(getOnibus(viagemDisponivel), isWindows);

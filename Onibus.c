@@ -64,6 +64,10 @@ char **getAssentos(Onibus *onibus) {
     return onibus->assentos;
 }
 
+void desocupaAssento(Onibus *onibus, int fileira, int coluna) {
+    onibus->assentos[fileira - 1][coluna - 1] = 'L';
+}
+
 void setAssento(Onibus *onibus, int fileira, int coluna) {
     onibus->assentos[fileira - 1][coluna - 1] = 'O';
 }

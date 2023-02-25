@@ -1,4 +1,5 @@
 #include "Passageiro.h"
+#include "Onibus.h"
 
 #ifndef PROJETORODOVIARIA_PASSAGEM_H
 #define PROJETORODOVIARIA_PASSAGEM_H
@@ -58,5 +59,7 @@ void salvaPassagem(Passagem *passagem, char *nomeDoArquivo);
 void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassageiros, char *codigoDaPassagem);
 
 Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePassageiros);
+
+void removePassagem(struct onibus *onibus, char *filePassagens, char *filePassageiros, char *cpf);
 
 #endif //PROJETORODOVIARIA_PASSAGEM_H
