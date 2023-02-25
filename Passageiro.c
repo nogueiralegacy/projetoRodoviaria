@@ -5,15 +5,15 @@ const char *FORMATO_PASSAGEIRO_IN = "(%[^,],%[^,],%[^,],%[^,],%[^)])\n";
 
 struct passageiro {
     char nome[50];
-    char cpf[12];
-    char telefone[12];
+    char cpf[15];
+    char telefone[15];
     char email[50];
-    char telefoneDeEmergencia[12];
+    char telefoneDeEmergencia[15];
 };
 
 typedef struct passageiro Passageiro;
 
-Passageiro *iniciaPassageiro(char nome[50], char cpf[12], char telefone[12], char email[50], char telefoneDeEmergencia[12]) {
+Passageiro *iniciaPassageiro(char nome[50], char cpf[15], char telefone[15], char email[50], char telefoneDeEmergencia[15]) {
     Passageiro *passageiro = (Passageiro *) malloc(sizeof(Passageiro));
     strcpy(passageiro->nome, nome);
     strcpy(passageiro->cpf, cpf);
@@ -63,11 +63,11 @@ void setNome(Passageiro *passageiro, char nome[50]) {
     strcpy(passageiro->nome, nome);
 }
 
-void setCpf(Passageiro *passageiro, char cpf[12]) {
+void setCpf(Passageiro *passageiro, char cpf[15]) {
     strcpy(passageiro->cpf, cpf);
 }
 
-void setTelefone(Passageiro *passageiro, char telefone[12]) {
+void setTelefone(Passageiro *passageiro, char telefone[15]) {
     strcpy(passageiro->telefone, telefone);
 }
 
@@ -75,7 +75,7 @@ void setEmail(Passageiro *passageiro, char email[50]) {
     strcpy(passageiro->email, email);
 }
 
-void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[12]) {
+void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[15]) {
     strcpy(passageiro->telefoneDeEmergencia, telefoneDeEmergencia);
 }
 

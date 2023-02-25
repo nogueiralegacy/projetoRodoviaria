@@ -49,12 +49,14 @@ void imprimeLegenda(int isWindows);
 
 void exibirAcentos(Onibus *onibus, int isWindows);
 
-void exibirPassagemComprada();
+void exibirPassagemComprada(Viagem *viagem, int isWindows);
 
 void passagemCompradaComSucesso();
 
 void passagemCancelada();
 
 void pausa(int isWindows);
+
+void calculaTotal(Viagem *viagem);
 
 #endif /* PROJETORODOVIARIA_INTERFACE_H */

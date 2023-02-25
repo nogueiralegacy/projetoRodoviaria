@@ -193,21 +193,21 @@ void menu(int isWindows) {
 
 Passageiro *comprarPassagem() {
     char nome[50];
-    char cpf[12];
-    char telefone[12];
+    char cpf[15];
+    char telefone[15];
     char email[50];
-    char telefoneDeEmergencia[12];
+    char telefoneDeEmergencia[15];
 
     printf("Digite o nome do passageiro:\n");
     fgets(nome, 50, stdin);
     printf("\n");
 
     printf("Digite o CPF do passageiro:\n");
-    fgets(cpf, 13, stdin);
+    fgets(cpf, 15, stdin);
     printf("\n");
 
     printf("Digite o numero de telefone do passageiro:\n");
-    fgets(telefone, 12, stdin);
+    fgets(telefone, 15, stdin);
     printf("\n");
 
     printf("Digite o endereco de email do passageiro:\n");
@@ -215,7 +215,7 @@ Passageiro *comprarPassagem() {
     printf("\n");
 
     printf("Digite um numero de telefone em caso de emergencias:\n");
-    fgets(telefoneDeEmergencia, 12, stdin);
+    fgets(telefoneDeEmergencia, 15, stdin);
     printf("\n");
 
     Passageiro *novoPassageiro = iniciaPassageiro(nome, cpf, telefone, email, telefoneDeEmergencia);
@@ -282,10 +282,50 @@ void exibirAcentos(Onibus *onibus, int isWindows) {
 
     imprimeLegenda(isWindows);
 }
+void exibirPassagemComprada(Viagem *viagem, int isWindows) {
+    recuperaViagem(viagem, "viagem.csv", "onibus.csv", "passagem.csv", "passageiro.csv");
+    printf(ANSI_COLOR_CYAN "+++++++++++++++++++++++++++++++++++++++++ EXIBICAO PASSAGEM COMPRADAS ++++++++++++++++++++++++++++++++++++++++++\n\n" ANSI_DEFAULT);
+    printf("+--------------------------------------------------------------------------------------------------------------+\n");
+    printf("|       NOME        |      CPF     |     TELEFONE    |    EMBARQUE    |      DESTINO     |  ASSENTO  |  VALOR  |\n");
+    printf("+--------------------------------------------------------------------------------------------------------------+\n");
 
-void exibirPassagemComprada() {
+    ListaPassagensVendidas *listaPassagensVendidas = getListaPassagensVendidas(viagem);
+if (getQuantidadeDePassagensVendidas(listaPassagensVendidas) == 0) {
+        printf("| Nao ha passagens compradas.                                                                             |\n");
+    } else {
+        PassagemVendida *passagemVendida = getInicioListaPassagensVendidas(listaPassagensVendidas);
+         while (passagemVendida != NULL) {
+             Passagem *passagem = getPassagem(passagemVendida);
+             Passageiro *passageiro = getPassageiro(getPassagem(passagemVendida));
+             printf("+--------------------------------------------------------------------------------------------------------------+\n");
+             printf("| %17s ", getNome(passageiro));
+             printf("| %12s ", getCpf(passageiro));
+             printf("| %13s   ", getTelefone(passageiro));
+             printf("| %11s    ", getOrigem(viagem));
+             printf("| %15s  ", getDestino(viagem));
+             printf("|  %2d : %d   ", getFileira(passagem), getColuna(passagem));
+             printf("|  %.2f |\n", getValor(passagem));
+             printf("+--------------------------------------------------------------------------------------------------------------+\n");
+             passagemVendida = getProximo(passagemVendida);
+         }
+         printf ("\n\n");
+    }
+}
 
-} // implementar ainda mec, so copiar
+void calculaTotal(Viagem *viagem) {
+    float total = 0;
+    ListaPassagensVendidas *listaPassagensVendidas = getListaPassagensVendidas(viagem);
+    PassagemVendida *passagemVendida = getInicioListaPassagensVendidas(listaPassagensVendidas);
+    while (passagemVendida != NULL) {
+        Passagem *passagem = getPassagem(passagemVendida);
+        total += getValor(passagem);
+        passagemVendida = getProximo(passagemVendida);
+    }
+
+    printf("TOTAL FATURADO: " );
+    printf(ANSI_COLOR_GREEN "R$ %.2f" ANSI_DEFAULT, total);
+    printf("\n\n");
+}
 
 void passagemCompradaComSucesso() {
     printf(ANSI_COLOR_GREEN "Sua passagem foi comprada com sucesso!\n" ANSI_DEFAULT);

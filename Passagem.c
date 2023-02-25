@@ -94,7 +94,7 @@ void recuperaPassagem(Passagem *passagem, char *filePassagens, char *filePassage
     Passageiro *passageiro = criaPassageiro();
     char linha[200];
     while (fgets(linha, 200, arquivo) != NULL) {
-        char cpf[12];
+        char cpf[15];
         sscanf(linha, FORMATO_PASSAGEM_IN, cpf, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
         recuperaPassageiro(passageiro, filePassageiros, cpf);
         setPassageiro(passagem, passageiro);
@@ -113,7 +113,7 @@ Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePa
     Passagem **passagens = NULL;
     *indice = 0;
     while (fgets(linha, 200, arquivo) != NULL) {
-        char cpf[12];
+        char cpf[15];
         Passagem *passagem = criaPassagem();
         Passageiro *passageiro = criaPassageiro();
 
@@ -139,7 +139,7 @@ void removePassagem (Onibus *onibus, char *filePassagens, char *filePassageiros 
     Passagem *passagem = criaPassagem();
     char linha[200];
     while (fgets(linha, 200, arquivo) != NULL) {
-        char cpfTemp[12];
+        char cpfTemp[15];
 
         sscanf(linha, FORMATO_PASSAGEM_IN, cpfTemp, passagem->codigoDaPassagem, &passagem->fileira, &passagem->coluna, &passagem->valor);
 

@@ -217,6 +217,9 @@ void salvaViagem(Viagem *viagem, char *nomeArquivo) {
 }
 
 void recuperaViagem(Viagem *viagem, char *fileViagem, char *fileOnibus, char *filePassagens, char *filePassageiros) {
+    liberaListaDePassagensVendidas(viagem->listaPassagensVendidas);
+    viagem->listaPassagensVendidas = iniciaListaPassagensVendidas();
+
     FILE *arquivo = fopen(fileViagem, "r");
 
     fscanf(arquivo, FORMATO_VIAGEM_IN, viagem->codigoDaViagem, viagem->companhia, viagem->origem, viagem->destino, viagem->dataEHoraDeSaida);

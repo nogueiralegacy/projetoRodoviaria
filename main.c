@@ -106,9 +106,9 @@ int main() {
 
             case 2:; /* Cancelar passagem */
 
-                char cpfTemp[12];
+                char cpfTemp[15];
                 printf("Digite o CPF do passageiro para remover:\n");
-                fgets(cpfTemp, 12, stdin);
+                fgets(cpfTemp, 15, stdin);
                 printf("\n");
 
                 cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
@@ -147,14 +147,12 @@ int main() {
 
             case 5: /* Exibir as passagens ja compradas */
 
-                // Percorrer a lista de passagem vendidas, imprimindo as colunas
-
+                exibirPassagemComprada(viagemDisponivel, isWindows);
+                pausa(isWindows);
                 break;
-            case 6: /* Calcular total vendido (concatenar) */
-
-                // Recuperamos as duas viagens da persistencia, para percorrer as passagens
-                // vendidas, concatenamos as listas de passagens e percorremos somando
-
+            case 6:
+                calculaTotal(viagemDisponivel);
+                pausa(isWindows);
                 break;
             case 7: /* Sair do aplicativo */
                 printf("Obrigado por utilizar nossos servicos, volte sempre!");
@@ -166,7 +164,8 @@ int main() {
                 pausa(isWindows);
         }
 
-    } while (opcao != 7);
 
+    } while (opcao != 7);
+    liberaViagem(viagemDisponivel);
     return 0;
 }
