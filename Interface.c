@@ -203,7 +203,7 @@ Passageiro *comprarPassagem() {
     printf("\n");
 
     printf("Digite o CPF do passageiro:\n");
-    fgets(cpf, 12, stdin);
+    fgets(cpf, 13, stdin);
     printf("\n");
 
     printf("Digite o numero de telefone do passageiro:\n");
