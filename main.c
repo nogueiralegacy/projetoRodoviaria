@@ -47,7 +47,7 @@ int main() {
     interfaceCompanhia(isWindows);
     pausa(isWindows);
 
-    /* Apresentat ticket da viagem */
+    /* Apresentar ticket da viagem */
     viagensDisponiveis(viagemDisponivel);
     pausa(isWindows);
 

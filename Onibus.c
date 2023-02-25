@@ -72,7 +72,6 @@ void setAssento(Onibus *onibus, int fileira, int coluna) {
     onibus->assentos[fileira - 1][coluna - 1] = 'O';
 }
 
-
 int assentoVazio(Onibus *onibus, int fileira, int coluna) {
     if (onibus->assentos[fileira][coluna] == 'L') {
         return 1;
