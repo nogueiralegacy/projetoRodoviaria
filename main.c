@@ -11,7 +11,8 @@
 #include "Viagem.h"
 
  /**
-  * Metodo para encontrar em qual SO a aplicaçao ta rodando
+  * Metodo para encontrar em qual SO a aplicaçao ta rodando,
+  * para garantir a compatibilidade das exibiçoes em qualquer SO.
   * @return TRUE (1) Se for Windows ou FALSE (0) se nao for
   */
  int defineSO() {
@@ -42,9 +43,11 @@ int main() {
     Viagem *viagemDisponivel = criaViagem();
     recuperaViagem(viagemDisponivel, "viagem.csv", "onibus.csv", "passagem.csv", "passageiro.csv");
 
+    /* Interface colorida */
     interfaceCompanhia(isWindows);
     pausa(isWindows);
 
+    /* Apresentat ticket da viagem */
     viagensDisponiveis(viagemDisponivel);
     pausa(isWindows);
 
@@ -105,7 +108,6 @@ int main() {
                 break;
 
             case 2:; /* Cancelar passagem */
-
                 char cpfTemp[15];
                 printf("Digite o CPF do passageiro para remover:\n");
                 fgets(cpfTemp, 15, stdin);
@@ -116,13 +118,13 @@ int main() {
                 passagemCancelada();
                 pausa(isWindows);
                 break;
+
             case 3: /* Vizualizar a situacao de todos os acentos */
                 exibirAcentos(getOnibus(viagemDisponivel), isWindows);
                 pausa(isWindows);
                 break;
 
             case 4: /* Vizualizar a situacao de um determinado acento */
-
                 exibirAcentos(getOnibus(viagemDisponivel), isWindows);
                 printf("Digite a fileira e coluna a ser consultada:\n");
                 scanf("%d %d", &linha, &coluna);
@@ -146,18 +148,20 @@ int main() {
                 break;
 
             case 5: /* Exibir as passagens ja compradas */
-
-                exibirPassagemComprada(viagemDisponivel, isWindows);
+                exibirPassagemComprada(viagemDisponivel);
                 pausa(isWindows);
                 break;
-            case 6:
+
+            case 6: /* Valor total das passagens ja compradas */
                 calculaTotal(viagemDisponivel);
                 pausa(isWindows);
                 break;
+
             case 7: /* Sair do aplicativo */
                 printf("Obrigado por utilizar nossos servicos, volte sempre!");
                 printf(ANSI_COLOR_RED " <3\n\n" ANSI_DEFAULT);
                 break;
+
             default:
                 printf(ANSI_COLOR_RED "Ops! Opcao invalida.\n" ANSI_DEFAULT);
                 printf(ANSI_COLOR_RED "Por favor, digite uma opcao valida. Obrigado!\n\n" ANSI_DEFAULT);

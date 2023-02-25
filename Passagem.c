@@ -1,7 +1,7 @@
 #include "Passagem.h"
 
 //No arquivo de passagem será guardado o CPF do passageiro
-const char *FORMATO_PASSAGEM_OUT = "(%s,%s,%d,%d,%f)\n";
+const char *FORMATO_PASSAGEM_OUT = "(%s,%s,%d,%d,%.2f)\n";
 const char *FORMATO_PASSAGEM_IN = "(%[^,],%[^,],%d,%d,%f)\n";
 
 struct passagem {

@@ -1,8 +1,8 @@
 #ifndef PROJETORODOVIARIA_INTERFACE_H
 #define PROJETORODOVIARIA_INTERFACE_H
 
-#define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_DEFAULT "\033[0m"
+#define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_BLACK "\x1b[30m"
 #define ANSI_COLOR_YELLOW "\x1b[33m"
@@ -49,7 +49,7 @@ void imprimeLegenda(int isWindows);
 
 void exibirAcentos(Onibus *onibus, int isWindows);
 
-void exibirPassagemComprada(Viagem *viagem, int isWindows);
+void exibirPassagemComprada(Viagem *viagem);
 
 void passagemCompradaComSucesso();
 

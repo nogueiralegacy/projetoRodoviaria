@@ -56,11 +56,11 @@ void imprimeLateral(int isWindows) {
 
 void by(int isWindows) {
     if (isWindows) {
-        printf(ANSI_COLOR_YELLOW "%c Felipe Moreira da Silva  | Engenharia de Software\n" ANSI_DEFAULT, 254);
-        printf(ANSI_COLOR_YELLOW "%c Daniel Nogueira da Costa | Engenharia de Software\n\n\n" ANSI_DEFAULT, 254);
+        printf(ANSI_COLOR_BLUE "%c Felipe Moreira da Silva  | Engenharia de Software\n" ANSI_DEFAULT, 254);
+        printf(ANSI_COLOR_BLUE "%c Daniel Nogueira da Costa | Engenharia de Software\n\n\n" ANSI_DEFAULT, 254);
     } else {
-        printf(ANSI_COLOR_YELLOW "\u2578 Felipe Moreira da Silva  | Engenharia de Software\n" ANSI_DEFAULT);
-        printf(ANSI_COLOR_YELLOW "\u2578 Daniel Nogueira da Costa | Engenharia de Software\n\n\n" ANSI_DEFAULT);
+        printf(ANSI_COLOR_BLUE "\u2578 Felipe Moreira da Silva  | Engenharia de Software\n" ANSI_DEFAULT);
+        printf(ANSI_COLOR_BLUE "\u2578 Daniel Nogueira da Costa | Engenharia de Software\n\n\n" ANSI_DEFAULT);
     }
 }
 
@@ -96,7 +96,7 @@ void interfaceCompanhia(int isWindows) {
 }
 
 void pausa(int isWindows) {
-    printf("\t\t\tPressione ENTER para continuar.");
+    printf(ANSI_COLOR_YELLOW "\t\t\tPressione ENTER para continuar." ANSI_DEFAULT);
     getchar();
 
     if (isWindows) {
@@ -107,17 +107,17 @@ void pausa(int isWindows) {
 }
 
 void viagensDisponiveis(Viagem *viagem) {
-    /* vai receber as viagens da persistencia */
-    printf("++++++ VIAGENS  DISPONIVEIS ++++++\n\n");
+    printf(ANSI_COLOR_CYAN "++++++++ VIAGENS  DISPONIVEIS ++++++++\n\n" ANSI_DEFAULT);
 
-    printf("+------------------------------------+\n");
+    printf(ANSI_COLOR_BLUE_BACK"+------------------------------------+\n");
     printf("| -> Partindo de: %18s |\n", getOrigem(viagem));
     printf("| <- Indo para: %20s |\n", getDestino(viagem));
     printf("| Horario de Saida: %11s |\n", getDataEHoraDeSaida(viagem));
     printf("| COMPANHIA %24s |\n", getCompanhia(viagem));
     printf("| ONIBUS N %25s |\n", getCodigoDoOnibus(getOnibus(viagem)));
     printf("| Valor da passagem:       R$ 375,00 |\n");
-    printf("+------------------------------------+\n\n");
+    printf("+------------------------------------+\n\n" ANSI_DEFAULT);
+    printf("\n");
 }
 
 void iniciaMenu(int isWindows) {
@@ -127,7 +127,7 @@ void iniciaMenu(int isWindows) {
         for (i = 0; i < 25; i++) {
             printf("%c", 205);
         }
-        printf(" M E N U ");
+        printf(ANSI_COLOR_CYAN " M E N U " ANSI_DEFAULT);
         for (i = 0; i < 26; i++) {
             printf("%c", 205);
         }
@@ -137,7 +137,7 @@ void iniciaMenu(int isWindows) {
         for (i = 0; i < 25; i++) {
             printf("\u2550");
         }
-        printf(" M E N U ");
+        printf(ANSI_COLOR_CYAN " M E N U " ANSI_DEFAULT);
         for (i = 0; i < 26; i++) {
             printf("\u2550");
         }
@@ -282,7 +282,7 @@ void exibirAcentos(Onibus *onibus, int isWindows) {
 
     imprimeLegenda(isWindows);
 }
-void exibirPassagemComprada(Viagem *viagem, int isWindows) {
+void exibirPassagemComprada(Viagem *viagem) {
     recuperaViagem(viagem, "viagem.csv", "onibus.csv", "passagem.csv", "passageiro.csv");
     printf(ANSI_COLOR_CYAN "+++++++++++++++++++++++++++++++++++++++++ EXIBICAO PASSAGEM COMPRADAS ++++++++++++++++++++++++++++++++++++++++++\n\n" ANSI_DEFAULT);
     printf("+--------------------------------------------------------------------------------------------------------------+\n");
