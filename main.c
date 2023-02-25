@@ -29,7 +29,7 @@
  * @param saida String com codigo
  */
 void gerarCodigoPassagem(char *saida) {
-//    srand(time(NULL));
+    srand(time(NULL));
     int codigo = rand() % 1000;
     sprintf(saida, "%d", codigo);
  }
@@ -126,7 +126,7 @@ int main() {
                 }
 
                 getchar();
-                 if (assentoVazio(getOnibus(viagemDisponivel),linha, coluna)) {
+                 if (assentoVazio(getOnibus(viagemDisponivel),linha - 1, coluna - 1)) {
                      printf(ANSI_COLOR_GREEN "O acento da fileira %d, coluna %d esta vazio!\n\n" ANSI_DEFAULT, linha, coluna);
                  } else {
                      printf(ANSI_COLOR_RED "O acento da fileira %d, coluna %d esta ocupado!\n\n" ANSI_DEFAULT, linha, coluna);
