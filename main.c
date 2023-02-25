@@ -104,7 +104,16 @@ int main() {
                 liberaPassagem(passagemComprada);
                 break;
 
-            case 2: /* Cancelar passagem */
+            case 2:; /* Cancelar passagem */
+
+                char cpfTemp[12];
+                printf("Digite o CPF do passageiro para remover:\n");
+                fgets(cpfTemp, 12, stdin);
+                printf("\n");
+
+                cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
+                removerPassageiro("passageiro.csv", cpfTemp);
+
                 break;
             case 3: /* Vizualizar a situacao de todos os acentos */
                 exibirAcentos(getOnibus(viagemDisponivel), isWindows);

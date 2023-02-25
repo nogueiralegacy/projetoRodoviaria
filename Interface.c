@@ -6,7 +6,7 @@ void iniciaInterface(int isWindows) {
     printf("\n\n");
     printf("            ");
     if (isWindows) {
-        printf(ANSI_COLOR_CYAN "%c" ANSI_DEFAULT, 201);
+        printf(ANSI_COLOR_CYAN " %c" ANSI_DEFAULT, 201);
         for (int i = 0; i < 51; i++) {
             printf(ANSI_COLOR_CYAN "%c" ANSI_DEFAULT, 205);
         }
@@ -202,7 +202,7 @@ Passageiro *comprarPassagem() {
     fgets(nome, 50, stdin);
     printf("\n");
 
-    printf("Digite o CPF do passageiro: (EX: 12345678912)\n");
+    printf("Digite o CPF do passageiro:\n");
     fgets(cpf, 12, stdin);
     printf("\n");
 

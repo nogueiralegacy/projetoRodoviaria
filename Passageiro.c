@@ -108,3 +108,26 @@ void recuperaPassageiro(Passageiro *passageiro, char *nomeDoArquivo, char *cpf) 
     }
     fclose(arquivo);
 }
+
+void removerPassageiro(char *nomeDoArquivo , char *cpf) {
+    FILE *arquivo = fopen(nomeDoArquivo, "r");
+    FILE* arquivoTemporario = fopen("temp.csv", "w");
+
+    char linha[200];
+    Passageiro *passageiro = criaPassageiro();
+    while (fgets(linha, 200, arquivo) != NULL) {
+        sscanf(linha, FORMATO_PASSAGEIRO_IN, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+               passageiro->telefoneDeEmergencia);
+        if (strcmp(passageiro->cpf, cpf) != 0) {
+            fprintf(arquivoTemporario, FORMATO_PASSAGEIRO_OUT, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
+                    passageiro->telefoneDeEmergencia);
+            fprintf(arquivo, "\n");
+        }
+    }
+
+    fclose(arquivo);
+    fclose(arquivoTemporario);
+
+    remove(nomeDoArquivo);
+    rename("temp.csv", nomeDoArquivo);
+}
