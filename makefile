@@ -2,7 +2,7 @@ all: projeto
 
 #Constroi e compila o projeto
 projeto:
-	gcc -o projeto main.c Interface.c
+	gcc -o projeto main.c Interface.c Onibus.c Passageiro.c Passagem.c Viagem.c
 
 #Apaga o arquivo executavel
 clean:

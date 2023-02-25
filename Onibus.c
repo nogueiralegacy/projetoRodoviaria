@@ -65,7 +65,7 @@ char **getAssentos(Onibus *onibus) {
 }
 
 void setAssento(Onibus *onibus, int fileira, int coluna) {
-    onibus->assentos[fileira][coluna] = 'O';
+    onibus->assentos[fileira - 1][coluna - 1] = 'O';
 }
 
 
@@ -76,7 +76,6 @@ int assentoVazio(Onibus *onibus, int fileira, int coluna) {
         return 0;
     }
 }
-
 
 int getQuantidadeDeFileiras(Onibus *onibus) {
     return FILEIRAS;

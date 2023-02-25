@@ -124,6 +124,10 @@ Onibus *getOnibus(Viagem *viagem) {
     return viagem->onibus;
 }
 
+ListaPassagensVendidas *getListaPassagensVendidas(Viagem *viagem) {
+    return viagem->listaPassagensVendidas;
+}
+
 void setCodigoDaViagem(Viagem *viagem, char codigoDaViagem[12]) {
     strcpy(viagem->codigoDaViagem, codigoDaViagem);
 }

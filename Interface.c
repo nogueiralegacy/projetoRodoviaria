@@ -106,26 +106,17 @@ void pausa(int isWindows) {
     }
 }
 
-void viagensDisponiveis() {
+void viagensDisponiveis(Viagem *viagem) {
     /* vai receber as viagens da persistencia */
     printf("++++++ VIAGENS  DISPONIVEIS ++++++\n\n");
 
     printf("+--------------------------------+\n");
-    printf("| Viagem 1:                      |\n");
-    printf("| -> Partindo de: ANAPOLIS       |\n");
-    printf("| <- Indo para: GOIANIA          |\n");
-    printf("| Horario de Saida: 17:00hrs     |\n| Horario de Chegada: 18:00hrs   |\n");
-    printf("| ROTA 0001 - ONIBUS N 202105027 |\n");
-    printf("| Valor da passagem: R$ 100,00   |\n");
-    printf("+--------------------------------+\n\n");
-
-    printf("+--------------------------------+\n");
-    printf("| Viagem 2:                      |\n");
-    printf("| -> Partindo de: SAO PAULO      |\n");
-    printf("| <- Indo para: RIO DE JANEIRO   |\n");
-    printf("| Horario de Saida: 07:00hrs     |\n| Horario de Chegada: 14:30hrs   |\n");
-    printf("| ROTA 0002 - ONIBUS N 202105048 |\n");
-    printf("| Valor da passagem: R$ 350,00   |\n");
+    printf("| -> Partindo de: %20s |\n", getOrigem(viagem));
+    printf("| <- Indo para: %20s |\n", getDestino(viagem));
+    printf("| Horario de Saida: %11s |\n", getDataEHoraDeSaida(viagem));
+    printf("| COMPANHIA %20s |\n", getCompanhia(viagem));
+    printf("| ONIBUS N %20s |\n", getCodigoDoOnibus(getOnibus(viagem)));
+    printf("| Valor da passagem: R$ 375,00   |\n");
     printf("+--------------------------------+\n\n");
 }
 
@@ -200,7 +191,7 @@ void menu(int isWindows) {
     printf("Escoha uma opcao:\n");
 }
 
-void comprarPassagem() {
+Passageiro *comprarPassagem() {
     char nome[50];
     char cpf[12];
     char telefone[12];
@@ -227,7 +218,9 @@ void comprarPassagem() {
     fgets(telefoneDeEmergencia, 12, stdin);
     printf("\n");
 
-    /* Alinhar e passar para passageiro */
+    Passageiro *novoPassageiro = iniciaPassageiro(nome, cpf, telefone, email, telefoneDeEmergencia);
+    salvaPassageiro(novoPassageiro, "passageiro.csv");
+    return novoPassageiro;
 }
 
 void recadoAcentos() {
@@ -294,7 +287,7 @@ void exibirPassagemComprada() {
 
 } // implementar ainda mec, so copiar
 
-void passagemComprada() {
+void passagemCompradaComSucesso() {
     printf(ANSI_COLOR_GREEN "Sua passagem foi comprada com sucesso!\n" ANSI_DEFAULT);
     printf(ANSI_COLOR_GREEN "Muito obrigado pela sua preferencia :)\n\n" ANSI_DEFAULT);
 }

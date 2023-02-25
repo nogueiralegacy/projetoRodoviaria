@@ -83,7 +83,7 @@ void setPassageiro(Passagem *passagem, struct passageiro *passageiro) {
 void salvaPassagem(Passagem *passagem, char *nomeDoArquivo) {
     FILE *file;
 
-    file = fopen(nomeDoArquivo, "a");
+    file = fopen(nomeDoArquivo, "a+");
     fprintf(file, FORMATO_PASSAGEM_OUT, getCpf(passagem->passageiro), passagem->codigoDaPassagem, passagem->fileira, passagem->coluna, passagem->valor);
     fclose(file);
 }
@@ -109,10 +109,8 @@ Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePa
     FILE *arquivo;
     arquivo = fopen(filePassagens, "r");
 
-
-
     char linha[200];
-    Passagem **passagens = (Passagem **) malloc(sizeof(Passagem *) * 10);
+    Passagem **passagens = NULL;
     *indice = 0;
     while (fgets(linha, 200, arquivo) != NULL) {
         char cpf[12];
@@ -123,6 +121,7 @@ Passagem **recuperaTodasPassagens(int *indice, char *filePassagens, char *filePa
 
         recuperaPassageiro(passageiro, filePassageiros, cpf);
         setPassageiro(passagem, passageiro);
+        passagens = (Passagem**)realloc(passagens, sizeof(passagens) + sizeof(Passagem));
         passagens[*indice] = passagem;
         *indice = *indice + 1;
     }

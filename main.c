@@ -5,6 +5,7 @@
 #endif
 
 #include <stdio.h>
+#include <time.h>
 #include "Interface.h"
 #include "Onibus.h"
 #include "Viagem.h"
@@ -23,18 +24,28 @@
     return isWindows;
 }
 
+/**
+ * Metodo para gerar um codigo de passagem aleatorio
+ * @param saida String com codigo
+ */
+void gerarCodigoPassagem(char *saida) {
+//    srand(time(NULL));
+    int codigo = rand() % 1000;
+    sprintf(saida, "%d", codigo);
+ }
+
 int main() {
     int isWindows = defineSO();
     int opcao, linha, coluna;
 
-    /* Instanciar listas */
-
-    // Usamos a varivel viagem para dar o get onibus
-    Onibus *onibus = criaOnibus();
-
-    /* Iniciar gravaçao em arquivos */
+    /* Instanciar viagem */
+    Viagem *viagemDisponivel = criaViagem();
+    recuperaViagem(viagemDisponivel, "viagem.csv", "onibus.csv", "passagem.csv", "passageiro.csv");
 
     interfaceCompanhia(isWindows);
+    pausa(isWindows);
+
+    viagensDisponiveis(viagemDisponivel);
     pausa(isWindows);
 
     do {
@@ -44,43 +55,65 @@ int main() {
         printf("\n");
 
         switch (opcao) {
-            case 1: /* Comprar passagem */
+            case 1:; /* Comprar passagem */
 
                 /* Receber dados do usuario */
+                Passageiro *novoPassageiro = comprarPassagem();
 
                 printf("Escolha um acento, que nao esteja ocupado ou reservado.\n\n");
-                exibirAcentos(onibus, isWindows);
+                exibirAcentos(getOnibus(viagemDisponivel), isWindows);
                 printf("\n");
 
                 printf("Digite a fileira e coluna do acento:\n");
-                scanf("%d %d", &linha, &coluna);
-                printf("\n");
-
-                while (linha < 1 || coluna < 1 || linha > 12 || coluna > 4) {
-                    printf(ANSI_COLOR_RED "O numero digitado nao corresponde ao numero de fileiras ou colunas!\n" ANSI_DEFAULT);
-                    printf(ANSI_COLOR_RED "Por favor, digite a fileira e coluna do acento novamente\n" ANSI_DEFAULT);
+                while (1) {
                     scanf("%d %d", &linha, &coluna);
                     printf("\n");
+
+                    if (linha < 1 || coluna < 1 || linha > 12 || coluna > 4) {
+                        printf(ANSI_COLOR_RED "O numero digitado nao corresponde ao numero de fileiras ou colunas!\n" ANSI_DEFAULT);
+                        printf(ANSI_COLOR_RED "Por favor, digite a fileira e coluna do acento novamente\n" ANSI_DEFAULT);
+                        continue;
+                    }
+
+                    if (!assentoVazio(getOnibus(viagemDisponivel),linha - 1, coluna - 1)) {
+                        printf(ANSI_COLOR_RED "Esse acento nao esta disponivel! Por favor escolha outro.\n" ANSI_DEFAULT);
+                        printf(ANSI_COLOR_RED "Digite novamente a fileira e coluna do acento:\n" ANSI_DEFAULT);
+                        continue;
+                    }
+                    break;
                 }
 
-                /* While poltrona ocupada */
+                /* Ocupa o acento dentro do Onibus */
+                setAssento(getOnibus(viagemDisponivel),linha, coluna);
 
-                // insere na lista
-                // inserir na persistencia
+                /* Inserindo passageiro na lista */
+                char codigoPassagem[12];
+                gerarCodigoPassagem(codigoPassagem);
+                Passagem *passagemComprada = iniciaPassagem(codigoPassagem, linha, coluna, 375.00, novoPassageiro);
+                insereListaPassagensVendidas(getListaPassagensVendidas(viagemDisponivel), passagemComprada);
 
-                passagemComprada();
+                /* Inserir na persistencia */
+                salvaPassagem(passagemComprada, "passagem.csv");
+                salvarOnibus(getOnibus(viagemDisponivel), "onibus.csv");
+
+                getchar();
+                passagemCompradaComSucesso();
                 pausa(isWindows);
+
+                /* Liberar passagem e passageiro */
+                liberaPassagem(passagemComprada);
                 break;
 
             case 2: /* Cancelar passagem */
                 break;
             case 3: /* Vizualizar a situacao de todos os acentos */
-                exibirAcentos(onibus, isWindows);
+                exibirAcentos(getOnibus(viagemDisponivel), isWindows);
                 pausa(isWindows);
                 break;
 
             case 4: /* Vizualizar a situacao de um determinado acento */
-                exibirAcentos(onibus, isWindows);
+
+                exibirAcentos(getOnibus(viagemDisponivel), isWindows);
                 printf("Digite a fileira e coluna a ser consultada:\n");
                 scanf("%d %d", &linha, &coluna);
                 printf("\n");
@@ -93,7 +126,7 @@ int main() {
                 }
 
                 getchar();
-                 if (assentoVazio(onibus,linha - 1, coluna - 1)) {
+                 if (assentoVazio(getOnibus(viagemDisponivel),linha, coluna)) {
                      printf(ANSI_COLOR_GREEN "O acento da fileira %d, coluna %d esta vazio!\n\n" ANSI_DEFAULT, linha, coluna);
                  } else {
                      printf(ANSI_COLOR_RED "O acento da fileira %d, coluna %d esta ocupado!\n\n" ANSI_DEFAULT, linha, coluna);

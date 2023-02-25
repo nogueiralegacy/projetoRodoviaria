@@ -38,6 +38,8 @@ char *getDataEHoraDeSaida(Viagem *viagem);
 
 struct onibus *getOnibus(Viagem *viagem);
 
+ListaPassagensVendidas *getListaPassagensVendidas(Viagem *viagem);
+
 void setCodigoDaViagem(Viagem *viagem, char codigoDaViagem[12]);
 
 void setCompanhia(Viagem *viagem, char companhia[50]);

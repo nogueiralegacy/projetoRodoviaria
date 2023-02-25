@@ -1,6 +1,6 @@
 #include "Passageiro.h"
 
-const char *FORMATO_PASSAGEIRO_OUT = "(%s,%s,%s,%s,%s)\n";
+const char *FORMATO_PASSAGEIRO_OUT = "(%s,%s,%s,%s,%s)";
 const char *FORMATO_PASSAGEIRO_IN = "(%[^,],%[^,],%[^,],%[^,],%[^)])\n";
 
 struct passageiro {
@@ -80,10 +80,17 @@ void setTelefoneDeEmergencia(Passageiro *passageiro, char telefoneDeEmergencia[1
 }
 
 void salvaPassageiro(Passageiro *passageiro, char *nomeArquivo) {
-    FILE *arquivo = fopen(nomeArquivo, "a");
+    FILE *arquivo = fopen(nomeArquivo, "a+");
+
+    passageiro->nome[strcspn(passageiro->nome, "\n")] = '\0';
+    passageiro->cpf[strcspn(passageiro->cpf, "\n")] = '\0';
+    passageiro->telefone[strcspn(passageiro->telefone, "\n")] = '\0';
+    passageiro->email[strcspn(passageiro->email, "\n")] = '\0';
+    passageiro->telefoneDeEmergencia[strcspn(passageiro->telefoneDeEmergencia, "\n")] = '\0';
 
     fprintf(arquivo, FORMATO_PASSAGEIRO_OUT, passageiro->nome, passageiro->cpf, passageiro->telefone, passageiro->email,
             passageiro->telefoneDeEmergencia);
+    fprintf(arquivo, "\n");
     fclose(arquivo);
 }
 

@@ -19,7 +19,7 @@ void testIniciaOnibusCodigo() {
 }
 
 void testIniciaOnibusAssentos() {
-    Onibus  *onibus = iniciaOnibus("12345678910");
+    Onibus *onibus = iniciaOnibus("12345678910");
 
     for (int fileira = 0; fileira < getQuantidadeDeFileiras(onibus); fileira++) {
         for (int coluna = 0; coluna < getQuantidadeDeColunas(onibus); coluna++) {

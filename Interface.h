@@ -23,6 +23,7 @@
 #include "Onibus.h"
 #include "Passageiro.h"
 #include "Passagem.h"
+#include "Viagem.h"
 
 void iniciaInterface(int isWindows);
 
@@ -32,13 +33,15 @@ void interfaceCompanhia(int isWindows);
 
 void imprimeLateral(int isWindows);
 
-void viagensDisponiveis();
+void viagensDisponiveis(Viagem *viagem);
 
 void iniciaMenu(int isWindows);
 
 void finalizaMenu(int isWindows);
 
 void menu(int isWindows);
+
+Passageiro *comprarPassagem();
 
 void recadoAcentos();
 
@@ -48,7 +51,7 @@ void exibirAcentos(Onibus *onibus, int isWindows);
 
 void exibirPassagemComprada();
 
-void passagemComprada();
+void passagemCompradaComSucesso();
 
 void passagemCancelada();
 
